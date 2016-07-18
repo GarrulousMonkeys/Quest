@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -18,9 +12,7 @@ import {
   MapView
 } from 'react-native';
 
-var ArtifactList = require('./App/Components/ArtifactListView')
-//var MapViewContainer = require('./App/Components/MapView')
-//There's a bug in requiring MapViewContainer as a separate file. For now the class is defined in the main file.
+var ArtifactList = require('./ArtifactListView')
 
 class MapViewContainer extends Component {
 
@@ -75,35 +67,6 @@ class MapViewContainer extends Component {
   }
 }
 
-class quest extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {navigationBarHidden: false}
-  }
-
-  toggleNavBar() {
-    this.setState({
-      navigationBarHidden: !this.state.navigationBarHidden
-    });
-  }
-
-  render() {
-    return (
-      <NavigatorIOS ref="nav"
-                    itemWrapperStyle={styles.navWrap}
-                    style={styles.nav}
-                    navigationBarHidden={this.state.navigationBarHidden}
-                    initialRoute={{
-                      component: MapViewContainer,
-                      title: "Map View",
-                      passProps: {
-                        //toggleNavBar: this.toggleNavBar.bind(this)
-                      }
-                    }} />
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   mapContainer: {
     flex:1
@@ -131,4 +94,5 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('quest', () => quest);
+
+module.exports = MapViewContainer;
