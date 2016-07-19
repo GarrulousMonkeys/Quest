@@ -12,7 +12,7 @@ import { MapViewContainer } from './MapViewContainer';
 
 
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   mainContainer: { flex: 1,
     marginTop: 65,
     flexDirection: 'column',
@@ -37,7 +37,6 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     flexDirection: 'row',
     borderColor: 'white',
-    // borderRadius: 8,
     color: 'white'
   },
 
@@ -49,7 +48,6 @@ var styles = StyleSheet.create({
 
   bgImage: { flex: 1,
     justifyContent: 'center',
-    // alignItems: 'stretch',
     resizeMode: 'cover'
   },
 
@@ -90,18 +88,15 @@ class SignIn extends Component {
   }
 
   _handleChangePage(title, component) {
-    //this.props.toggleNavBar();
     this.props.navigator.push({
       title: title,
       component: component,
       passProps: {
-        //toggleNavBar: this.props.toggleNavBar,
       }
     });
   }
   render() {
     return (
-      // <View style={styles.mainContainer}>
       <Image style={styles.bgImage} source={{uri: 'https://media.giphy.com/media/XWlS8OnV0KEBW/giphy.gif'}}>
         <Text style={styles.title}>Quest</Text>
         <TextInput style={styles.searchInput} onChange={this._handleChangeField.bind(this)} placeholder='username'/>
@@ -111,7 +106,6 @@ class SignIn extends Component {
         </TouchableHighlight>
         <TouchableHighlight onPress={()=>this._handleChangePage('Sign Up', SignUp)}><Text style={styles.signUp}>Don't have an account? Sign up here!</Text></TouchableHighlight>
         </Image>
-      // </View>
     )
   }
 }

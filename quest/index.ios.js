@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import {ArtifactList} from './App/Components/ArtifactListView';
 import {SignIn} from './App/Components/SignIn';
-import {MapViewContainer} from './App/Components/SignIn';
+import {MapViewContainer} from './App/Components/MapViewContainer';
 
 import {
   AppRegistry,
@@ -44,7 +44,6 @@ class quest extends Component {
                       component: SignIn,
                       title: "Log In",
                       passProps: {
-                        //toggleNavBar: this.toggleNavBar.bind(this)
                       }
                     }} />
     );
