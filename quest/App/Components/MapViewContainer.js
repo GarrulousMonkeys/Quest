@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ArtifactList } from './ArtifactListView';
 import { Profile } from './ProfileView';
+import { Dropview } from './Dropview';
 import {
   AppRegistry,
   ListView,
@@ -56,7 +57,7 @@ class MapViewContainer extends Component {
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Add Artifact', Dropview)}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Add Artifact</Text>
               </View>

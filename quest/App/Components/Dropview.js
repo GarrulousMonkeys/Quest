@@ -14,25 +14,30 @@ class Dropview extends Component {
 		}
 	}
 	render() {
-		return {
+		return (
 			<View style={styles.container}>
-				<Text>Artifact</Text>
-				<TextInput
+				<TextInput style={styles.textInput}
 					onChangeText={(text) => this.setState({text})}
 					placeholder='Type artifact text here'
 					value={this.state.text}
 				/>
 			</View>
-		}
+		)
 	}
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'blue',
-		padding: 20
+		backgroundColor: 'aqua',
+		padding: 20,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	textInput: {
+		flex: 1,
+		flexDirection: 'row'
 	}
 });
 
-export {Dropview}
+export { Dropview }
