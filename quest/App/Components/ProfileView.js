@@ -50,9 +50,12 @@ class Profile extends Component {
             renderRow={(rowData) => {
               return (
                 <View style={styles.rowContainer}>
-                  <Image source={{uri: rowData.imagePath}} style={styles.listImage} />
-                  <Text>{rowData.name}</Text>
-                  <Text>{rowData.date}</Text>
+                  <View style={styles.contentContainer}>
+                    <Image source={{uri: rowData.imagePath}} style={styles.listImage} />
+                    <Text>{rowData.name}</Text>
+                    <Text>{rowData.text}</Text>
+                    <Text>{rowData.date}</Text>
+                  </View>
                 </View>
                 );
             }
@@ -71,9 +74,12 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginTop: 10
   },
+  contentContainer: {
+    margin: 5,
+    alignItems: 'stretch'
+  },
   listImage: {
-    width: 380,
-    height:169
+     height: 200
   },
   headerContainer: {
     backgroundColor: '#48BBEC',
