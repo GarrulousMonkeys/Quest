@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {ArtifactList} from './ArtifactListView';
 import {
   AppRegistry,
   ListView,
@@ -11,8 +12,6 @@ import {
   TouchableWithoutFeedback,
   MapView
 } from 'react-native';
-
-var ArtifactList = require('./ArtifactListView')
 
 class MapViewContainer extends Component {
 
@@ -49,6 +48,13 @@ class MapViewContainer extends Component {
           region={this.state.region}
           />
           <View style={styles.bottomNav}>
+
+            <TouchableWithoutFeedback>
+              <View style={styles.bottomNavButton}>
+                <Text>Button: Go to Profile</Text>
+              </View>
+            </TouchableWithoutFeedback>
+
             <TouchableWithoutFeedback>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Add Artifact</Text>
@@ -80,12 +86,6 @@ const styles = StyleSheet.create({
     height:400,
     flex: 5
   },
-  navWrap: {
-    flex: 1
-  }, 
-  nav: {
-    flex: 1
-  },
   bottomNavButton: {
     flex:1,
     backgroundColor: "#d3d3d3",
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
 });
 
 
-module.exports = MapViewContainer;
+export {MapViewContainer};
