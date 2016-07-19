@@ -108,7 +108,7 @@ class SignUp extends Component {
         <TextInput style={styles.searchInput} onChange={this._handleChangeField.bind(this)} placeholder='username'/>
         <TextInput style={styles.searchInput} placeholder='password'/>
         <TouchableHighlight style={styles.button} underlayColor='black'>
-          <Text style={styles.buttonText} onPress={()=>this._handleChangePage('Map View', SignIn)}>SIGN UP</Text>
+          <Text style={styles.buttonText} onPress={()=>this._handleChangePage('Map View', MapViewContainer)}>SIGN UP</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={()=>this._handleChangePage('Sign in', SignIn)}><Text style={styles.signIn}>Already have an account? Sign in here!</Text></TouchableHighlight>
         </Image>
