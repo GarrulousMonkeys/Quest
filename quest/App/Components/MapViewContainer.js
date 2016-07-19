@@ -36,6 +36,7 @@ class MapViewContainer extends Component {
       title: title,
       component: component,
       passProps: {
+        dbRef: this.props.dbRef
         //toggleNavBar: this.props.toggleNavBar,
       }
     });

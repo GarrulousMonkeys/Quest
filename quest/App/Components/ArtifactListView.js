@@ -20,9 +20,9 @@ class ArtifactList extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([
-       {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'James Buchanan', date: 'July 14, 2016 11:31am', text:'sunny day at dolores = <3 <3 <3', imagePath: 'https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/12328107_1060282894027950_465354902_n.jpg'},
-        {name: 'John Wilson', date: 'July 15, 2016 10:04am', text:'Dolores park is awesome', imagePath: 'https://upload.wikimedia.org/wikipedia/commons/4/48/Mission_San_Francisco_de_Asis.PNG'}
+       {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-c3163.appspot.com/o/images%2Fimage1.jpg?alt=media&token=ba217126-0002-4dda-a195-ca7143a4d73b'},
+        {name: 'James Buchanan', date: 'July 14, 2016 11:31am', text:'sunny day at dolores = <3 <3 <3', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-c3163.appspot.com/o/images%2Fimage2.jpg?alt=media&token=3095bf1d-6f8c-4485-b655-45aa4663807f'},
+        {name: 'John Wilson', date: 'July 15, 2016 10:04am', text:'Dolores park is awesome', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-c3163.appspot.com/o/images%2Fimage3.png?alt=media&token=fdba6a11-8b9a-4e40-8cd9-470670570f24'}
         ])
     }
   }

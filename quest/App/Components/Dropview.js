@@ -3,7 +3,9 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TextInput
+	TextInput,
+	TouchableWithoutFeedback,
+	AlertIOS
 } from 'react-native';
 
 class Dropview extends Component {
@@ -13,6 +15,10 @@ class Dropview extends Component {
 			text: ''
 		}
 	}
+
+	sendArtifact() {
+		this.props.dbRef.push({ message: this.state.text, user: "Test User", timestamp: Date.now()}, function() { AlertIOS.alert('New message posted!')});
+	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -21,6 +27,12 @@ class Dropview extends Component {
 					placeholder='Type artifact text here'
 					value={this.state.text}
 				/>
+
+			<TouchableWithoutFeedback onPress={() => this.sendArtifact()}>
+              <View>
+                <Text>Button: Submit Test</Text>
+              </View>
+            </TouchableWithoutFeedback>
 			</View>
 		)
 	}
