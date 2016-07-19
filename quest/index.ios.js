@@ -6,7 +6,9 @@
 
 import React, { Component } from 'react';
 import {ArtifactList} from './App/Components/ArtifactListView';
-import {MapViewContainer} from './App/Components/MapViewContainer';
+import {SignIn} from './App/Components/SignIn';
+import {MapViewContainer} from './App/Components/SignIn';
+
 import {
   AppRegistry,
   ListView,
@@ -39,8 +41,8 @@ class quest extends Component {
                     style={styles.nav}
                     navigationBarHidden={this.state.navigationBarHidden}
                     initialRoute={{
-                      component: MapViewContainer,
-                      title: "Map View",
+                      component: SignIn,
+                      title: "Log In",
                       passProps: {
                         //toggleNavBar: this.toggleNavBar.bind(this)
                       }
