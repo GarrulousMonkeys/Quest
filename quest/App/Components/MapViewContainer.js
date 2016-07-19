@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {ArtifactList} from './ArtifactListView';
+import {Profile} from './profileView';
 import {
   AppRegistry,
   ListView,
@@ -28,11 +29,11 @@ class MapViewContainer extends Component {
     }
   }
 
-  _handleChangePage() {
+  _handleChangePage(title, component) {
     //this.props.toggleNavBar();
     this.props.navigator.push({
-      title: "Artifact List View",
-      component: ArtifactList,
+      title: title,
+      component: component,
       passProps: {
         //toggleNavBar: this.props.toggleNavBar,
       }
@@ -49,7 +50,7 @@ class MapViewContainer extends Component {
           />
           <View style={styles.bottomNav}>
 
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Profile View', Profile)}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Go to Profile</Text>
               </View>
@@ -61,7 +62,7 @@ class MapViewContainer extends Component {
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback onPress={() => this._handleChangePage()}>
+            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Artifact List View', ArtifactList)}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Go to List View</Text>
               </View>
