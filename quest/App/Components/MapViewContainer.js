@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {ArtifactList} from './ArtifactListView';
-import {Profile} from './profileView';
+import { ArtifactList } from './ArtifactListView';
+import { Profile } from './profileView';
 import {
   AppRegistry,
   ListView,

@@ -7,9 +7,9 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-import { SignUp } from './SignUp';
-import { MapViewContainer } from './MapViewContainer';
 
+import { SignIn } from './SignIn';
+import { MapViewContainer } from './MapViewContainer';
 
 
 var styles = StyleSheet.create({
@@ -66,14 +66,14 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
-  signUp: {
+  signIn: {
     color: 'white',
     padding: 10,
     textAlign: 'center'
   }
 });
 
-class SignIn extends Component {
+class SignUp extends Component {
   constructor() {
     super();
     this.state = {
@@ -99,21 +99,22 @@ class SignIn extends Component {
       }
     });
   }
+
   render() {
     return (
       // <View style={styles.mainContainer}>
-      <Image style={styles.bgImage} source={{uri: 'https://media.giphy.com/media/XWlS8OnV0KEBW/giphy.gif'}}>
+      <Image style={styles.bgImage} source={{uri: 'https://media.giphy.com/media/IuKnqFMhtcA2A/giphy.gif'}}>
         <Text style={styles.title}>Quest</Text>
         <TextInput style={styles.searchInput} onChange={this._handleChangeField.bind(this)} placeholder='username'/>
         <TextInput style={styles.searchInput} placeholder='password'/>
-        <TouchableHighlight style={styles.button}>
-          <Text style={styles.buttonText} onPress={()=>this._handleChangePage('Map View', MapViewContainer)} underlayColor='black'>SIGN IN</Text>
+        <TouchableHighlight style={styles.button} underlayColor='black'>
+          <Text style={styles.buttonText} onPress={()=>this._handleChangePage('Map View', SignIn)}>SIGN UP</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={()=>this._handleChangePage('Sign Up', SignUp)}><Text style={styles.signUp}>Don't have an account? Sign up here!</Text></TouchableHighlight>
+        <TouchableHighlight onPress={()=>this._handleChangePage('Sign in', SignIn)}><Text style={styles.signIn}>Already have an account? Sign in here!</Text></TouchableHighlight>
         </Image>
       // </View>
     )
   }
 }
 
-export { SignIn };
+export { SignUp };
