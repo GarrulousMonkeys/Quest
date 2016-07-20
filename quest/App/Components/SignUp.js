@@ -7,10 +7,8 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-
 import { SignIn } from './SignIn';
 import { MapViewContainer } from './MapViewContainer';
-
 
 var styles = StyleSheet.create({
   mainContainer: { flex: 1,
@@ -25,7 +23,6 @@ var styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white' },
 
-
   searchInput: {
     height: 50,
     padding: 10,
@@ -37,7 +34,6 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     flexDirection: 'row',
     borderColor: 'white',
-    // borderRadius: 8,
     color: 'white'
   },
 
@@ -49,7 +45,6 @@ var styles = StyleSheet.create({
 
   bgImage: { flex: 1,
     justifyContent: 'center',
-    // alignItems: 'stretch',
     resizeMode: 'cover'
   },
 
@@ -77,43 +72,68 @@ class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
+      email: '',
       password: '',
-      error: false
+      error: ''
     }
   }
 
-  _handleChangeField(e) {
-    this.setState({
-      username: e.nativeEvent.text
-    })
-  }
-
   _handleChangePage(title, component) {
-    //this.props.toggleNavBar();
     this.props.navigator.push({
       title: title,
-      component: component,
-      passProps: {
-        //toggleNavBar: this.props.toggleNavBar,
+      component: component
+    });
+  }
+
+  _handleSignUp() {
+    firebase.auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((error) => {
+        console.log('Error Code:', error.code);
+        console.log('Error Message:', error.message);
+        this.setState({error: error.message});
+    });
+    this._handleAuth();
+  }
+
+  _handleAuth(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this._handleChangePage('Map View', MapViewContainer);
       }
     });
   }
 
   render() {
     return (
-      // <View style={styles.mainContainer}>
-      <Image style={styles.bgImage} source={{uri: 'https://media.giphy.com/media/IuKnqFMhtcA2A/giphy.gif'}}>
-        <Text style={styles.title}>Quest</Text>
-        <TextInput style={styles.searchInput} onChange={this._handleChangeField.bind(this)} placeholder='username'/>
-        <TextInput style={styles.searchInput} placeholder='password'/>
-        <TouchableHighlight style={styles.button} underlayColor='black'>
-          <Text style={styles.buttonText} onPress={()=>this._handleChangePage('Map View', MapViewContainer)}>SIGN UP</Text>
+      <Image style={ styles.bgImage } 
+      source={{uri: 'https://media.giphy.com/media/IuKnqFMhtcA2A/giphy.gif'}}>
+        <Text style={ styles.title }>Quest</Text>
+        <TextInput 
+          style={ styles.searchInput }
+          value ={ this.state.email }
+          onChangeText={ (email) => this.setState({email}) } 
+          placeholder='email'/>
+        <TextInput 
+          style={ styles.searchInput }
+          secureTextEntry={ true }
+          value ={ this.state.password }
+          onChangeText={ (password) => this.setState({password}) } 
+          placeholder='password'/>
+        <TouchableHighlight 
+          style={ styles.button }
+          underlayColor='gray'
+          onPress={ this._handleSignUp.bind(this) } >
+          <Text style={ styles.buttonText }>SIGN UP</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={()=>this._handleChangePage('Sign in', SignIn)}><Text style={styles.signIn}>Already have an account? Sign in here!</Text></TouchableHighlight>
-        </Image>
-      // </View>
-    )
+        <TouchableHighlight 
+          onPress={ ()=>this._handleChangePage('Sign in', SignIn) }>
+          <Text style={ styles.signIn }>
+            Already have an account? Sign in here!
+          </Text>
+        </TouchableHighlight>    
+      </Image>
+    );
   }
 }
 

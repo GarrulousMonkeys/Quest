@@ -10,8 +10,6 @@ import {
 import { SignUp } from './SignUp';
 import { MapViewContainer } from './MapViewContainer';
 
-
-
 const styles = StyleSheet.create({
   mainContainer: { flex: 1,
     marginTop: 65,
@@ -24,7 +22,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Bodoni 72 Smallcaps',
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white' },
-
 
   searchInput: {
     height: 50,
@@ -75,16 +72,10 @@ class SignIn extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
+      email: '',
       password: '',
-      error: false
+      error: ''
     }
-  }
-
-  _handleChangeField(e) {
-    this.setState({
-      username: e.nativeEvent.text
-    })
   }
 
   _handleChangePage(title, component) {
@@ -97,18 +88,59 @@ class SignIn extends Component {
       }
     });
   }
+
+  _handleSignIn() {
+    firebase.auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((error) => {
+        console.log('Error Code:', error.code);
+        console.log('Error Message:', error.message);
+        this.setState({error: error.message});
+    });
+    this._handleAuth();
+  }
+
+  _handleAuth(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this._handleChangePage('Map View', MapViewContainer);
+      }
+    });
+  }
+
   render() {
+
+    //this._handleAuth();
+
     return (
-      <Image style={styles.bgImage} source={{uri: 'https://media.giphy.com/media/XWlS8OnV0KEBW/giphy.gif'}}>
-        <Text style={styles.title}>Quest</Text>
-        <TextInput style={styles.searchInput} onChange={this._handleChangeField.bind(this)} placeholder='username'/>
-        <TextInput style={styles.searchInput} placeholder='password'/>
-        <TouchableHighlight style={styles.button}>
-          <Text style={styles.buttonText} onPress={()=>this._handleChangePage('Map View', MapViewContainer)} underlayColor='black'>SIGN IN</Text>
+      <Image style={ styles.bgImage } 
+        source={ {uri: 'https://media.giphy.com/media/XWlS8OnV0KEBW/giphy.gif'} }>
+        <Text style={ styles.title }>Quest</Text>
+        <TextInput 
+          style={ styles.searchInput }
+          value ={ this.state.email }
+          onChangeText={ (email) => this.setState({email}) } 
+          placeholder='email'/>
+        <TextInput 
+          style={ styles.searchInput }
+          secureTextEntry={ true }
+          value ={ this.state.password }
+          onChangeText={ (password) => this.setState({password}) }
+          placeholder='password'/>
+        <TouchableHighlight 
+          style={ styles.button }
+          underlayColor='gray'
+          onPress={ this._handleSignIn.bind(this) }>
+          <Text style={ styles.buttonText } >SIGN IN</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={()=>this._handleChangePage('Sign Up', SignUp)}><Text style={styles.signUp}>Don't have an account? Sign up here!</Text></TouchableHighlight>
-        </Image>
-    )
+        <TouchableHighlight 
+          onPress={ ()=>this._handleChangePage('Sign Up', SignUp) }>
+          <Text style={ styles.signUp }>
+            Don't have an account? Sign up here!
+          </Text>
+        </TouchableHighlight>
+      </Image>
+    );
   }
 }
 
