@@ -13,6 +13,8 @@ import {
   ScrollView
 } from 'react-native';
 
+import { SelectedPhotoView } from './SelectedPhotoView';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,7 +58,21 @@ class CameraRollExample extends Component {
       selected: uri,
       selectedImage: image
     });
-    console.log(this.state.selectedImage);
+  }
+
+  changeView() {
+    this.props.navigator.push({
+      title: 'Select this photo?',
+      component: SelectedPhotoView,
+      passProps: {
+        uri: this.state.selected,
+        image: this.state.selectedImage
+      }
+    });
+  }
+  
+  componentDidUpdate() {
+    this.changeView();
   }
 
   storeImages(data) {
@@ -66,7 +82,6 @@ class CameraRollExample extends Component {
       images: images,
       selected: ''
     });
-    console.log(this);
 
   }
 
