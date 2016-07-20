@@ -16,8 +16,25 @@ class Dropview extends Component {
 		}
 	}
 
+  componentDidMount() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          var initialPosition = position;
+          this.setState({initialPosition: initialPosition});
+        },
+        (error) => alert(error.message),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
+      navigator.geolocation.watchPosition((position) => {
+        var lastPosition = position;
+        this.setState({lastPosition: lastPosition});
+      });
+  }
+
 	sendArtifact() {
-		this.props.dbRef.push({ message: this.state.text, user: "Test User", timestamp: Date.now()}, function() { AlertIOS.alert('New message posted!')});
+
+		//the JSON object sent to Firebase below contains text, geolocation, username, and a timestamp
+		this.props.dbRef.push({ message: this.state.text, user: "Test User", latitude: this.state.lastPosition.coords.latitude,longitude: this.state.lastPosition.coords.longitude, timestamp: Date.now()}, function() { AlertIOS.alert('New message posted!')});
 		
 		//image file upload code started here:
 		/*
