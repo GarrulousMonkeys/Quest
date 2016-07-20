@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { MapViewContainer } from './MapViewContainer';
 import {
   AppRegistry,
-  ScrollView,
   ListView,
   Image,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
 
 class Profile extends Component {
@@ -31,41 +31,44 @@ class Profile extends Component {
     }
   }
 
+  _handleLogOut() {
+    firebase.auth().signOut().then(() => {
+      console.log('bye');
+
+      this.props.navigator.popToTop();
+
+    },(error) => {
+      console.log(error);
+    });
+  }
+
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <Image style={styles.image} source={{uri: 'https://www.petfinder.com/wp-content/uploads/2012/11/152132425-newly-adopted-dog-632x475.jpg'}} />
+        <Image 
+          style={styles.image} 
+          source={{uri: 'https://www.petfinder.com/wp-content/uploads/2012/11/152132425-newly-adopted-dog-632x475.jpg'}} />
         <Text style={styles.name}> Joel Smith </Text>
         <Text style={styles.artifacts}> Number of Artifacts: 9 </Text>
+        <TouchableHighlight 
+          style={ styles.button }
+          underlayColor='gray'
+          onPress={ this._handleLogOut.bind(this) }>
+          <Text style={ styles.logout }>logout</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 
   render() {
 
-    var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid;
-
-    if (user != null) {
-      name = user.displayName;
-      email = user.email;
-      photoUrl = user.photoURL;
-      uid = user.uid;
-
-      // The user's ID, unique to the Firebase project. Do NOT use this value to authenticate with your backend server, if you have one. Use User.getToken() instead.
-      console.log('name', name);
-      console.log('email', email);
-      console.log('photoUrl', photoUrl);
-      console.log('uid', uid);
-    }
-
-
+    this.props.navigator.popToTop(0);
 
     return (
       <View style={styles.container}>
         <ListView
           dataSource={this.state.dataSource}
-          renderHeader={this.renderHeader}
+          renderHeader={this.renderHeader.bind(this)}
           renderRow={(rowData) => {
             return (
               <View style={styles.rowContainer}>
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
   },
   name: {
     alignSelf: 'center',
-    fontSize: 21,
+    fontSize: 22,
     marginTop: 10,
     marginBottom: 5,
     color: 'white'
@@ -122,10 +125,44 @@ const styles = StyleSheet.create({
     borderRadius: 65,
     marginTop: 10,
     alignSelf: 'center'
+  },
+  logout: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontSize: 20,
+    color: 'white'
+  },
+  button: {
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    marginBottom: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    backgroundColor: '#ef5350',
   }
 })
 
 export { Profile };
+
+
+// var user = firebase.auth().currentUser;
+// var name, email, photoUrl, uid;
+
+// if (user != null) {
+//   name = user.displayName;
+//   email = user.email;
+//   photoUrl = user.photoURL;
+//   uid = user.uid;
+
+//   // The user's ID, unique to the Firebase project. Do NOT use this value to authenticate with your backend server, if you have one. Use User.getToken() instead.
+//   console.log('name', name);
+//   console.log('email', email);
+//   console.log('photoUrl', photoUrl);
+//   console.log('uid', uid);
+// }
 
 // firebase.auth().signOut().then(function() {
 //   // Sign-out successful.

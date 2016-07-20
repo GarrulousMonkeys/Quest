@@ -11,18 +11,20 @@ import { SignUp } from './SignUp';
 import { MapViewContainer } from './MapViewContainer';
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1,
+  mainContainer: { 
+    flex: 1,
     marginTop: 65,
     flexDirection: 'column',
-    justifyContent: 'center'},
-
-  title: { fontSize: 60,
+    justifyContent: 'center'
+  },
+  title: { 
+    fontSize: 60,
     paddingBottom: 40,
     textAlign: 'center',
     fontFamily: 'Bodoni 72 Smallcaps',
     backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white' },
-
+    color: 'white' 
+  },
   searchInput: {
     height: 50,
     padding: 10,
@@ -36,18 +38,15 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     color: 'white'
   },
-
   buttonText: {
     fontSize: 18,
     color: '#000',
     alignSelf: 'center'
   },
-
   bgImage: { flex: 1,
     justifyContent: 'center',
     resizeMode: 'cover'
   },
-
   button: {
     height: 45,
     flexDirection: 'row',
@@ -65,6 +64,12 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     textAlign: 'center'
+  },
+  error: {
+    color: '#ef5350',
+    padding: 10,
+    textAlign: 'center',
+    backgroundColor: 'rgba(0,0,0,0)'
   }
 });
 
@@ -79,6 +84,8 @@ class SignIn extends Component {
   }
 
   _handleChangePage(title, component) {
+    console.log('this.props.dbRef', this.props.dbRef);
+    console.log('this.props.storageRef', this.props.storageRef);
     this.props.navigator.push({
       title: title,
       component: component,
@@ -90,14 +97,24 @@ class SignIn extends Component {
   }
 
   _handleSignIn() {
+    let email = this.state.email.trim();
+    let password = this.state.password;
+
     firebase.auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .signInWithEmailAndPassword(email, password)
       .catch((error) => {
         console.log('Error Code:', error.code);
         console.log('Error Message:', error.message);
         this.setState({error: error.message});
     });
+
     this._handleAuth();
+    
+    this.setState({
+      email: '',
+      password: ''
+    });
+
   }
 
   _handleAuth(){
@@ -110,7 +127,7 @@ class SignIn extends Component {
 
   render() {
 
-    //this._handleAuth();
+    this._handleAuth();
 
     return (
       <Image style={ styles.bgImage } 
@@ -119,13 +136,13 @@ class SignIn extends Component {
         <TextInput 
           style={ styles.searchInput }
           value ={ this.state.email }
-          onChangeText={ (email) => this.setState({email}) } 
+          onChangeText={ (email) => this.setState( {email}) } 
           placeholder='email'/>
         <TextInput 
           style={ styles.searchInput }
           secureTextEntry={ true }
           value ={ this.state.password }
-          onChangeText={ (password) => this.setState({password}) }
+          onChangeText={ (password) => this.setState( {password}) }
           placeholder='password'/>
         <TouchableHighlight 
           style={ styles.button }
@@ -139,6 +156,7 @@ class SignIn extends Component {
             Don't have an account? Sign up here!
           </Text>
         </TouchableHighlight>
+        <Text style={styles.error}>{this.state.error}</Text>
       </Image>
     );
   }

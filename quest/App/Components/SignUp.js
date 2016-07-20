@@ -10,19 +10,21 @@ import {
 import { SignIn } from './SignIn';
 import { MapViewContainer } from './MapViewContainer';
 
-var styles = StyleSheet.create({
-  mainContainer: { flex: 1,
+const styles = StyleSheet.create({
+  mainContainer: { 
+    flex: 1,
     marginTop: 65,
     flexDirection: 'column',
-    justifyContent: 'center'},
-
-  title: { fontSize: 60,
+    justifyContent: 'center'
+  },
+  title: { 
+    fontSize: 60,
     paddingBottom: 40,
     textAlign: 'center',
     fontFamily: 'Bodoni 72 Smallcaps',
     backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white' },
-
+    color: 'white' 
+  },
   searchInput: {
     height: 50,
     padding: 10,
@@ -36,18 +38,15 @@ var styles = StyleSheet.create({
     borderColor: 'white',
     color: 'white'
   },
-
   buttonText: {
     fontSize: 18,
     color: '#000',
     alignSelf: 'center'
   },
-
   bgImage: { flex: 1,
     justifyContent: 'center',
     resizeMode: 'cover'
   },
-
   button: {
     height: 45,
     flexDirection: 'row',
@@ -65,6 +64,12 @@ var styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     textAlign: 'center'
+  },
+  error: {
+    color: '#ef5350',
+    padding: 10,
+    textAlign: 'center',
+    backgroundColor: 'rgba(0,0,0,0)'
   }
 });
 
@@ -86,8 +91,11 @@ class SignUp extends Component {
   }
 
   _handleSignUp() {
+    let email = this.state.email.trim();
+    let password = this.state.password;
+
     firebase.auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
         console.log('Error Code:', error.code);
         console.log('Error Message:', error.message);
@@ -131,7 +139,8 @@ class SignUp extends Component {
           <Text style={ styles.signIn }>
             Already have an account? Sign in here!
           </Text>
-        </TouchableHighlight>    
+        </TouchableHighlight> 
+        <Text style={styles.error}>{this.state.error}</Text>   
       </Image>
     );
   }
