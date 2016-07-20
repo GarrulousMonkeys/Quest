@@ -1,14 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import * as firebase from 'firebase';
+import GiftedSpinner from 'react-native-gifted-spinner';
 import React, { Component } from 'react';
-import {ArtifactList} from './App/Components/ArtifactListView';
-import {SignIn} from './App/Components/SignIn';
-import {MapViewContainer} from './App/Components/MapViewContainer';
+import { ArtifactList } from './App/Components/ArtifactListView';
+import { SignIn } from './App/Components/SignIn';
+import { MapViewContainer } from './App/Components/MapViewContainer';
 
 import {
   AppRegistry,
@@ -25,9 +20,8 @@ import {
 } from 'react-native';
 
 // Initialize Firebase
-const configKey = require('./environment/environment');
-var firebaseApp = firebase.initializeApp(configKey);
-
+import { ENV } from './environment/environment';
+const firebaseApp = firebase.initializeApp(ENV);
 
 class quest extends Component {
   constructor(props) {

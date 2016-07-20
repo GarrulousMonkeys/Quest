@@ -42,25 +42,44 @@ class Profile extends Component {
   }
 
   render() {
+
+    var user = firebase.auth().currentUser;
+    var name, email, photoUrl, uid;
+
+    if (user != null) {
+      name = user.displayName;
+      email = user.email;
+      photoUrl = user.photoURL;
+      uid = user.uid;
+
+      // The user's ID, unique to the Firebase project. Do NOT use this value to authenticate with your backend server, if you have one. Use User.getToken() instead.
+      console.log('name', name);
+      console.log('email', email);
+      console.log('photoUrl', photoUrl);
+      console.log('uid', uid);
+    }
+
+
+
     return (
-        <View style={styles.container}>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderHeader={this.renderHeader}
-            renderRow={(rowData) => {
-              return (
-                <View style={styles.rowContainer}>
-                  <View style={styles.contentContainer}>
-                    <Image source={{uri: rowData.imagePath}} style={styles.listImage} />
-                    <Text>{rowData.name}</Text>
-                    <Text>{rowData.text}</Text>
-                    <Text>{rowData.date}</Text>
-                  </View>
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderHeader={this.renderHeader}
+          renderRow={(rowData) => {
+            return (
+              <View style={styles.rowContainer}>
+                <View style={styles.contentContainer}>
+                  <Image source={{uri: rowData.imagePath}} style={styles.listImage} />
+                  <Text>{rowData.name}</Text>
+                  <Text>{rowData.text}</Text>
+                  <Text>{rowData.date}</Text>
                 </View>
-                );
-            }
-          }/>
-        </View>
+              </View>
+            );
+          }
+        }/>
+      </View>
     ); 
   }
 }
@@ -107,3 +126,9 @@ const styles = StyleSheet.create({
 })
 
 export { Profile };
+
+// firebase.auth().signOut().then(function() {
+//   // Sign-out successful.
+// }, function(error) {
+//   // An error happened.
+// });
