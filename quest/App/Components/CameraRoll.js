@@ -13,7 +13,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import { SelectedPhotoView } from './SelectedPhotoView';
+import CameraRollPicker from 'react-native-camera-roll-picker';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +39,22 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     // margin: 10
-
+  },
+  bottomNav: { 
+    flex:2,
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  },
+  bottomNavButton: {
+    flex:1,
+    backgroundColor: "#24CE84",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: 30,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 30
   }
 })
 
@@ -47,66 +62,52 @@ class CameraRollExample extends Component {
   constructor() {
     super();
     this.state = {
-      images: [],
-      selected: '',
-      selectedImage: {}
+      selected: [],
+      num: 0,
+      imageSelected: false,
     }
   }
-
-  selectImage(image, uri) {
+  getSelectedImage(images) {
+    let num = images.length;
     this.setState({
-      selected: uri,
-      selectedImage: image
+      num: num,
+      selected: images
     });
+    this.selectChecker()
   }
-
-  changeView() {
-    this.props.navigator.push({
-      title: 'Select this photo?',
-      component: SelectedPhotoView,
-      passProps: {
-        uri: this.state.selected,
-        image: this.state.selectedImage
-      }
-    });
-  }
-  
-  componentDidUpdate() {
-    this.changeView();
-  }
-
-  storeImages(data) {
-    const assets = data.edges;
-    const images = assets.map(asset => asset.node.image);
-    this.setState({
-      images: images,
-      selected: ''
-    });
-
-  }
-
-  logError(err) {
-    console.log(err);
-  }
-  componentDidMount() {
-    const fetchParams = {
-      first: 25
+  selectChecker() {
+    if(this.state.num > 0) {
+      this.setState({
+        imageSelected: false
+      });
+    } else {
+      this.setState({
+        imageSelected: true
+      });
     }
-    CameraRoll.getPhotos(fetchParams)
-      .then((data) => this.storeImages(data), (e) => logError(e));
   }
-
+  buttonShow() {
+    return this.state.imageSelected ? <TouchableHighlight>
+            <View style={styles.bottomNavButton}>
+              <Text style={styles.buttonText}>SELECT</Text>
+            </View>
+          </TouchableHighlight> : <View></View>
+  }
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.imageGrid}>
-          {this.state.images.map((image, index) => 
-            <TouchableHighlight key={index} style={styles.image} onPress={this.selectImage.bind(this, image, image.uri)}>
-              <Image style={styles.image} source={{ uri: image.uri }}/>
-            </TouchableHighlight>
-            )}
-        </View>
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView style={styles.container}>
+          <TouchableHighlight>
+            <View style={styles.imageGrid}>
+              <CameraRollPicker
+                callback={this.getSelectedImage.bind(this)}
+                selected={this.state.selected}
+                maximum={1}/>
+            </View>
+          </TouchableHighlight>
+        </ScrollView>
+          {this.buttonShow()}
+      </View>
     )
   }
 }
