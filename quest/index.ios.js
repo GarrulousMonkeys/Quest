@@ -28,11 +28,13 @@ import {
 const configKey = require('./environment/environment');
 var firebaseApp = firebase.initializeApp(configKey);
 
+
 class quest extends Component {
   constructor(props) {
     super(props)
     this.state = {navigationBarHidden: false}
     this.dbRef = firebaseApp.database().ref();
+    this.storageRef = firebaseApp.storage().ref();
   }
 
   listenForData(dbRef) {
@@ -74,7 +76,8 @@ class quest extends Component {
                       component: SignIn,
                       title: "Log In",
                       passProps: {
-                        dbRef: this.dbRef
+                        dbRef: this.dbRef,
+                        storageRef: this.storageRef
                       }
                     }} />
     );
