@@ -13,9 +13,6 @@ import {
   ScrollView
 } from 'react-native';
 
-import { CameraRollPicker } from 'react-native-camera-roll-picker';
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,7 +62,6 @@ class CameraRollExample extends Component {
   storeImages(data) {
     const assets = data.edges;
     const images = assets.map(asset => asset.node.image);
-    // console.log(this.state.images);
     this.setState({
       images: images,
       selected: ''
