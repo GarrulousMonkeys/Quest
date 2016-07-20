@@ -24,6 +24,7 @@ class MapViewContainer extends Component {
     super(props)
 
       this.state = {
+      visible: false,
       region: {
         latitude: 37.74825,
         longitude: -122.4224,
@@ -36,6 +37,10 @@ class MapViewContainer extends Component {
           {latitude: 37.76825, longitude: -122.4124, title: 'Chris', subtitle: '"yum"'}
           ]
     }
+  }
+
+  componentDidMount() {
+    this.setState({visible:true});
   }
 
   _handleChangePage(title, component) {
