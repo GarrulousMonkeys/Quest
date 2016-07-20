@@ -14,7 +14,8 @@ import {
   NavigatorIOS,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  MapView
+  MapView,
+  TouchableOpacity
 } from 'react-native';
 
 class MapViewContainer extends Component {
@@ -28,7 +29,12 @@ class MapViewContainer extends Component {
         longitude: -122.4224,
         latitudeDelta: 0.1922,
         longitudeDelta: 0.0421
-      }
+      }, annotations : [
+          {latitude: 37.74825, longitude: -122.4224, title: 'Jeff:', subtitle: '"yooooooo"'},
+          {latitude: 37.75825, longitude: -122.4324, title: 'Julius', subtitle: '"whats up"'},
+          {latitude: 37.73825, longitude: -122.4124, title: 'Michelle', subtitle: '"heyoo"'},
+          {latitude: 37.76825, longitude: -122.4124, title: 'Chris', subtitle: '"yum"'}
+          ]
     }
   }
 
@@ -52,6 +58,7 @@ class MapViewContainer extends Component {
           style={styles.map}
           showsUserLocation={true}
           region={this.state.region}
+          annotations={this.state.annotations}
           />
           <View style={styles.bottomNav}>
 
