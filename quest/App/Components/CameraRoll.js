@@ -85,8 +85,8 @@ class CameraRollExample extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.imageGrid}>
-          {this.state.images.map(image => 
-            <TouchableHighlight style={styles.image} onPress={this.selectImage.bind(this, image, image.uri)}>
+          {this.state.images.map((image, index) => 
+            <TouchableHighlight key={index} style={styles.image} onPress={this.selectImage.bind(this, image, image.uri)}>
               <Image style={styles.image} source={{ uri: image.uri }}/>
             </TouchableHighlight>
             )}
