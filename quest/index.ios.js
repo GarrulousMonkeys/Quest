@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import GiftedSpinner from 'react-native-gifted-spinner';
 import React, { Component } from 'react';
 import { ArtifactList } from './App/Components/ArtifactListView';
 import { SignIn } from './App/Components/SignIn';

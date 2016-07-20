@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ArtifactList } from './ArtifactListView';
 import { Profile } from './ProfileView';
 import { Dropview } from './Dropview';
+import { CameraRollExample } from './CameraRoll';
+
 import {
   AppRegistry,
   ListView,
@@ -64,7 +66,11 @@ class MapViewContainer extends Component {
                 <Text>Button: Add Artifact</Text>
               </View>
             </TouchableWithoutFeedback>
-
+            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Camera Roll', CameraRollExample)}>
+              <View style={styles.bottomNavButton}>
+                <Text>Button: Camera Roll</Text>
+              </View>
+            </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => this._handleChangePage('Artifact List View', ArtifactList)}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Go to List View</Text>
