@@ -92,6 +92,8 @@ class SignIn extends Component {
       title: title,
       component: component,
       passProps: {
+        dbRef: this.props.dbRef,
+        storageRef: this.props.storageRef
       }
     });
   }

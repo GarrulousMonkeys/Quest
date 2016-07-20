@@ -4,6 +4,7 @@
  * @flow
  */
 
+import * as firebase from 'firebase';
 import React, { Component } from 'react';
 import {ArtifactList} from './App/Components/ArtifactListView';
 import {SignIn} from './App/Components/SignIn';
@@ -19,13 +20,44 @@ import {
   NavigatorIOS,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  MapView
+  MapView,
+  AlertIOS
 } from 'react-native';
+
+// Initialize Firebase
+const configKey = require('./environment/environment');
+var firebaseApp = firebase.initializeApp(configKey);
+
 
 class quest extends Component {
   constructor(props) {
     super(props)
     this.state = {navigationBarHidden: false}
+    this.dbRef = firebaseApp.database().ref();
+    this.storageRef = firebaseApp.storage().ref();
+  }
+
+  listenForData(dbRef) {
+
+    dbRef.on('value', (newRawData) => {
+
+      //get new data elements and do something with them
+      var newItems = [];
+      newRawData.forEach((item) => {
+        
+        //AlertIOS.alert('New value entered');
+      });
+
+      //Uncomment when we have real user data in the Firebase database
+      // this.setState({
+      //   dataSource: this.state.dataSource.cloneWithRows(newItems)
+      // });
+
+    });
+  }
+
+  componentDidMount() {
+      this.listenForData(this.dbRef);
   }
 
   toggleNavBar() {
@@ -44,6 +76,8 @@ class quest extends Component {
                       component: SignIn,
                       title: "Log In",
                       passProps: {
+                        dbRef: this.dbRef,
+                        storageRef: this.storageRef
                       }
                     }} />
     );

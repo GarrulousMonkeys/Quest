@@ -3,7 +3,9 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TextInput
+	TextInput,
+	TouchableWithoutFeedback,
+	AlertIOS
 } from 'react-native';
 
 class Dropview extends Component {
@@ -13,6 +15,25 @@ class Dropview extends Component {
 			text: ''
 		}
 	}
+
+	sendArtifact() {
+		this.props.dbRef.push({ message: this.state.text, user: "Test User", timestamp: Date.now()}, function() { AlertIOS.alert('New message posted!')});
+		
+		//image file upload code started here:
+		/*
+		var imageDestinationPath = this.props.storageRef.child('images/file.jpg');
+		var localFile = //need reference to image file on iPhone disk here
+		var metadata = {
+			username: undefined,
+			artifactID: undefined,
+		};
+		var uploadTask = imageDestinationPath.put(localFile, metadata)
+		//Reference for photo uploading: 
+		//https://github.com/firebase/quickstart-js/blob/master/storage/index.html
+		*/
+	
+	}
+	
 	render() {
 		return (
 			<View style={styles.container}>
@@ -21,6 +42,12 @@ class Dropview extends Component {
 					placeholder='Type artifact text here'
 					value={this.state.text}
 				/>
+
+			<TouchableWithoutFeedback onPress={() => this.sendArtifact()}>
+              <View>
+                <Text>Button: Submit Test</Text>
+              </View>
+            </TouchableWithoutFeedback>
 			</View>
 		)
 	}
