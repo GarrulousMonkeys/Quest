@@ -8,6 +8,8 @@ import { ArtifactListView } from './App/Components/ArtifactListView';
 import { DropView } from './App/Components/DropView';
 import { CameraView } from './App/Components/CameraView';
 import { CameraRollView } from './App/Components/CameraRollView';
+import { SubmitImageView } from './App/Components/SubmitImageView';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -27,7 +29,8 @@ const ROUTES = {
   ArtifactListView: ArtifactListView,
   DropView: DropView,
   CameraView: CameraView,
-  CameraRollView: CameraRollView
+  CameraRollView: CameraRollView,
+  SubmitImageView: SubmitImageView
 }
 
 const styles = StyleSheet.create({

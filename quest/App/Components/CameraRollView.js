@@ -12,7 +12,7 @@ import {
   Switch,
   ScrollView
 } from 'react-native';
-
+import { SubmitImageView } from './SubmitImageView';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 
 const styles = StyleSheet.create({
@@ -79,12 +79,13 @@ class CameraRollView extends Component {
       this.setState({imageSelected: true})
     }
   }
-  handleSubmit() {
-    console.log('HANDLING SUBMIT');
-    // this is where we submit to db???
+  handleSubmit(name) {
+   this.props.navigator.push({
+      name: 'SubmitImageView'
+    });
   }
   buttonShow() {
-    return this.state.imageSelected ? <TouchableHighlight onPress={this.handleSubmit.bind(this)}>
+    return this.state.imageSelected ? <TouchableHighlight onPress={() => this.handleSubmit('SubmitImageView')}>
             <View style={styles.bottomNavButton}>
               <Text style={styles.buttonText}>SELECT</Text>
             </View>
