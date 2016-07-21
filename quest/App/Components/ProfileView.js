@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { MapViewContainer } from './MapViewContainer';
 import {
   AppRegistry,
   ListView,
@@ -10,7 +9,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-class Profile extends Component {
+class ProfileView extends Component {
   
   constructor(props) {
     super(props);
@@ -35,7 +34,7 @@ class Profile extends Component {
     firebase.auth().signOut().then(() => {
       console.log('bye');
 
-      this.props.navigator.popToTop();
+      this.props.navigator.resetTo({name: 'SignInView'});
 
     },(error) => {
       console.log(error);
@@ -61,9 +60,6 @@ class Profile extends Component {
   }
 
   render() {
-
-    this.props.navigator.popToTop(0);
-
     return (
       <View style={styles.container}>
         <ListView
@@ -145,7 +141,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export { Profile };
+export { ProfileView };
 
 
 // var user = firebase.auth().currentUser;

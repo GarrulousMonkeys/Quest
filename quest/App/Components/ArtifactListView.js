@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {MapViewContainer} from './MapViewContainer';
 import {
   ListView,
   StyleSheet,
@@ -10,9 +9,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
-//var MapViewContainer = require('./MapViewContainer')
-
-class ArtifactList extends Component {
+class ArtifactListView extends Component {
   
   constructor(props) {
     super(props)
@@ -97,6 +94,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export {ArtifactList}
+export {ArtifactListView}
 
 

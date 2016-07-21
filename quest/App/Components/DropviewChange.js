@@ -8,7 +8,7 @@ import {
 	AlertIOS
 } from 'react-native';
 
-class Dropview extends Component {
+class DropView extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export { Dropview }
+export { DropView }

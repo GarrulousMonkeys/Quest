@@ -7,8 +7,6 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-import { SignUp } from './SignUp';
-import { MapViewContainer } from './MapViewContainer';
 
 const styles = StyleSheet.create({
   mainContainer: { 
@@ -73,27 +71,14 @@ const styles = StyleSheet.create({
   }
 });
 
-class SignIn extends Component {
-  constructor() {
-    super();
+class SignInView extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
       error: ''
     }
-  }
-
-  _handleChangePage(title, component) {
-    console.log('this.props.dbRef', this.props.dbRef);
-    console.log('this.props.storageRef', this.props.storageRef);
-    this.props.navigator.push({
-      title: title,
-      component: component,
-      passProps: {
-        dbRef: this.props.dbRef,
-        storageRef: this.props.storageRef
-      }
-    });
   }
 
   _handleSignIn() {
@@ -102,27 +87,31 @@ class SignIn extends Component {
 
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ email: '', password: '' });
+        this._handleAuth();
+      })
       .catch((error) => {
         console.log('Error Code:', error.code);
         console.log('Error Message:', error.message);
-        this.setState({error: error.message});
-    });
-
-    this._handleAuth();
-    
-    this.setState({
-      email: '',
-      password: ''
-    });
-
+        this.setState({ password:'', error: error.message });
+    });    
   }
 
   _handleAuth(){
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this._handleChangePage('Map View', MapViewContainer);
+        this._handleToMap();
       }
     });
+  }
+
+  _handleToMap() {
+    this.props.navigator.resetTo({name: 'MainMapView'});
+  }
+
+  _handleToSignUp() {
+    this.props.navigator.push({name: 'SignUpView'});
   }
 
   render() {
@@ -151,7 +140,7 @@ class SignIn extends Component {
           <Text style={ styles.buttonText } >SIGN IN</Text>
         </TouchableHighlight>
         <TouchableHighlight 
-          onPress={ ()=>this._handleChangePage('Sign Up', SignUp) }>
+          onPress={ this._handleToSignUp.bind(this) }>
           <Text style={ styles.signUp }>
             Don't have an account? Sign up here!
           </Text>
@@ -162,4 +151,4 @@ class SignIn extends Component {
   }
 }
 
-export { SignIn };
+export { SignInView };

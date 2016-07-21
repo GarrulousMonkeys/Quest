@@ -7,8 +7,6 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-import { SignIn } from './SignIn';
-import { MapViewContainer } from './MapViewContainer';
 
 const styles = StyleSheet.create({
   mainContainer: { 
@@ -73,21 +71,15 @@ const styles = StyleSheet.create({
   }
 });
 
-class SignUp extends Component {
-  constructor() {
-    super();
+class SignUpView extends Component {
+  
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
       error: ''
     }
-  }
-
-  _handleChangePage(title, component) {
-    this.props.navigator.push({
-      title: title,
-      component: component
-    });
   }
 
   _handleSignUp() {
@@ -96,20 +88,31 @@ class SignUp extends Component {
 
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ email: '', password: '' });
+        this._handleAuth();
+      })
       .catch((error) => {
         console.log('Error Code:', error.code);
         console.log('Error Message:', error.message);
-        this.setState({error: error.message});
+        this.setState({ password: '', error: error.message });
     });
-    this._handleAuth();
   }
 
   _handleAuth(){
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this._handleChangePage('Map View', MapViewContainer);
+        this._handleToMap();
       }
     });
+  }
+
+  _handleToMap() {
+    this.props.navigator.resetTo({name: 'MainMapView'});
+  }
+
+  _handleToSignIn() {
+    this.props.navigator.pop();
   }
 
   render() {
@@ -135,7 +138,7 @@ class SignUp extends Component {
           <Text style={ styles.buttonText }>SIGN UP</Text>
         </TouchableHighlight>
         <TouchableHighlight 
-          onPress={ ()=>this._handleChangePage('Sign in', SignIn) }>
+          onPress={  this._handleToSignIn.bind(this) }>
           <Text style={ styles.signIn }>
             Already have an account? Sign in here!
           </Text>
@@ -146,4 +149,4 @@ class SignUp extends Component {
   }
 }
 
-export { SignUp };
+export { SignUpView };
