@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   }
 })
 
-class CameraRollExample extends Component {
+class CameraRollView extends Component {
   constructor() {
     super();
     this.state = {
@@ -109,4 +109,4 @@ class CameraRollExample extends Component {
   }
 }
 
-export { CameraRollExample };
+export { CameraRollView };

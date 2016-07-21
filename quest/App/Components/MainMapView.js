@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import { ArtifactList } from './ArtifactListView';
-import { Profile } from './ProfileView';
-import { Dropview } from './Dropview';
-import { CameraRollExample } from './CameraRoll';
-import { CameraView } from './CameraView';
-
-
 import {
   AppRegistry,
   ListView,
@@ -21,42 +14,41 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-class MapViewContainer extends Component {
+class MainMapView extends Component {
 
   constructor(props) {
     super(props)
 
-      this.state = {
-      visible: false,
+    this.state = {
       region: {
         latitude: 37.74825,
         longitude: -122.4224,
         latitudeDelta: 0.1922,
         longitudeDelta: 0.0421
-      }, annotations : [
-          {latitude: 37.74825, longitude: -122.4224, title: 'Jeff:', subtitle: '"yooooooo"'},
-          {latitude: 37.75825, longitude: -122.4324, title: 'Julius', subtitle: '"whats up"'},
-          {latitude: 37.73825, longitude: -122.4124, title: 'Michelle', subtitle: '"heyoo"'},
-          {latitude: 37.76825, longitude: -122.4124, title: 'Chris', subtitle: '"yum"'}
-          ]
-    }
+      }, 
+      annotations : [
+        {latitude: 37.74825, longitude: -122.4224, title: 'Jeff:', subtitle: '"yooooooo"'},
+        {latitude: 37.75825, longitude: -122.4324, title: 'Julius', subtitle: '"whats up"'},
+        {latitude: 37.73825, longitude: -122.4124, title: 'Michelle', subtitle: '"heyoo"'},
+        {latitude: 37.76825, longitude: -122.4124, title: 'Chris', subtitle: '"yum"'}
+      ]
+    } 
   }
 
-  componentDidMount() {
-    this.setState({visible:true});
-  }
+  _handleNextPage(componentName) {
 
-  _handleChangePage(title, component) {
-    //this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: title,
-      component: component,
-      passProps: {
-        dbRef: this.props.dbRef,
-        storageRef: this.props.storageRef
-        //toggleNavBar: this.props.toggleNavBar,
-      }
-    });
+    this.props.navigator.push({name: componentName});
+
+    // //this.props.toggleNavBar();
+    // this.props.navigator.push({
+    //   title: title,
+    //   component: component,
+    //   passProps: {
+    //     dbRef: this.props.dbRef,
+    //     storageRef: this.props.storageRef
+    //     //toggleNavBar: this.props.toggleNavBar,
+    //   }
+    // });
   }
 
   render() {
@@ -70,7 +62,7 @@ class MapViewContainer extends Component {
           />
           <View style={styles.bottomNav}>
 
-            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Profile View', Profile)}>
+            <TouchableWithoutFeedback onPress={() => this._handleNextPage('ProfileView')}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Go to Profile</Text>
               </View>
@@ -79,22 +71,24 @@ class MapViewContainer extends Component {
             <TouchableWithoutFeedback onPress={() =>
               AlertIOS.alert(
                 'Add an Artifact',
-       'What kind of artifact would you like to add?',
-       [
-         {text: 'Picture', onPress: () => this._handleChangePage('Camera', CameraView)},
-         {text: 'Message', onPress: () => this._handleChangePage('Drop View', Dropview)},
-       ],
-      )}>
+                'What kind of artifact would you like to add?',
+                 [
+                   {text: 'Picture', onPress: () => this._handleNextPage('CameraView')},
+                   {text: 'Message', onPress: () => this._handleNextPage('DropView')},
+                 ],
+              )}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Add Artifact</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Camera Roll', CameraRollExample)}>
+
+            <TouchableWithoutFeedback onPress={() => this._handleNextPage('CameraRollView')}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Camera Roll</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Artifact List View', ArtifactList)}>
+
+            <TouchableWithoutFeedback onPress={() => this._handleNextPage('ArtifactListView')}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Go to List View</Text>
               </View>
@@ -128,4 +122,4 @@ const styles = StyleSheet.create({
 });
 
 
-export {MapViewContainer};
+export {MainMapView};
