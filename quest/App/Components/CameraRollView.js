@@ -6,6 +6,7 @@ import {
   CameraRoll,
   TextInput,
   Slider,
+  NativeModules,
   Image,
   TouchableOpacity,
   TouchableHighlight,
@@ -67,6 +68,8 @@ class CameraRollView extends Component {
       imageSelected: false,
     }
   }
+
+
   getSelectedImage(selectedImage, currentImage) {
     let num = selectedImage.length;
     this.setState({
@@ -79,10 +82,17 @@ class CameraRollView extends Component {
       this.setState({imageSelected: true})
     }
   }
+
   handleSubmit(name) {
-   this.props.navigator.push({
-      name: 'SubmitImageView'
-    });
+    if (this.state.selected[0]) {
+      this.props.navigator.push({
+        name: name,
+        path: this.state.selected[0].uri
+      });
+      NativeModules.ReadImageData.readImage(this.state.selected[0].uri, (image) => {
+        console.log(image);
+      });
+    }
   }
   buttonShow() {
     return this.state.imageSelected ? <TouchableHighlight onPress={() => this.handleSubmit('SubmitImageView')}>

@@ -7,6 +7,7 @@ import {
   TextInput,
   Slider,
   Dimensions,
+  NativeModules,
   Image,
   TouchableOpacity,
   TouchableHighlight,
@@ -20,18 +21,20 @@ class CameraView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      picture: ''
+      path: ''
     }
   }
   takePicture() {
     this.camera.capture()
-      .then((data) => console.log(data))
+      .then((data) => this.setState({ path: data.path }))
+      .then(() => this._handleNextPage('SubmitImageView'))
       .catch(err => console.error(err));
   }
 
   _handleNextPage(name) {
     this.props.navigator.push({
-      name: name
+      name: name,
+      path: this.state.path
     });
   }
 
