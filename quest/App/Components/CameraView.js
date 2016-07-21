@@ -17,10 +17,13 @@ import Camera from 'react-native-camera';
 class CameraView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      picture: ''
+    }
   }
   takePicture() {
     this.camera.capture()
-      .then((data) => console.log(data))
+      .then((data) => this.setState({ picture: data }))
       .catch(err => console.error(err));
   }
   render() {
@@ -32,7 +35,12 @@ class CameraView extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+            <TouchableHighlight>
+              <View style={styles.goToCameraRoll}>
+                <Text style={styles.cameraRollText}>CAMERAROLL</Text>
+              </View>
+            </TouchableHighlight>
+          <View style={styles.capture} onPress={this.takePicture.bind(this)}></View>
         </Camera>
       </View>
     )
@@ -52,11 +60,27 @@ const styles = StyleSheet.create({
   },
   capture: {
     flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
+    backgroundColor: 'red',
+    borderRadius: 50,
+    height: 100,
+    width: 100,
     padding: 10,
-    margin: 40
+    justifyContent: 'center',
+    margin: 40,
+    borderWidth: 5,
+    borderColor: 'white'
+  },
+  goToCameraRoll: {
+    borderRadius: 25,
+    justifyContent: 'center',
+    height: 50,
+    width: 50,
+    backgroundColor: 'white'
+  },
+  cameraRollText: {
+    color: 'black',
+    textAlign: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   }
 });
 

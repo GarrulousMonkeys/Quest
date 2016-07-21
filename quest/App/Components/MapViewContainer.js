@@ -9,6 +9,7 @@ import { CameraView } from './CameraView';
 import {
   AppRegistry,
   ListView,
+  AlertIOS,
   StyleSheet,
   Text,
   Image,
@@ -75,7 +76,15 @@ class MapViewContainer extends Component {
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Add Artifact', Dropview)}>
+            <TouchableWithoutFeedback onPress={() =>
+              AlertIOS.alert(
+                'Add an Artifact',
+       'What kind of artifact would you like to add?',
+       [
+         {text: 'Picture', onPress: () => this._handleChangePage('Camera', CameraView)},
+         {text: 'Message', onPress: () => this._handleChangePage('Drop View', Dropview)},
+       ],
+      )}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Add Artifact</Text>
               </View>
@@ -83,11 +92,6 @@ class MapViewContainer extends Component {
             <TouchableWithoutFeedback onPress={() => this._handleChangePage('Camera Roll', CameraRollExample)}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Camera Roll</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Camera', CameraView)}>
-              <View style={styles.bottomNavButton}>
-                <Text>Button: Camera</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => this._handleChangePage('Artifact List View', ArtifactList)}>
