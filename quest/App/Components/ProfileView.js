@@ -86,6 +86,7 @@ class ProfileView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 60,
     flex: 1
   },
   rowContainer: {
@@ -142,26 +143,3 @@ const styles = StyleSheet.create({
 })
 
 export { ProfileView };
-
-
-// var user = firebase.auth().currentUser;
-// var name, email, photoUrl, uid;
-
-// if (user != null) {
-//   name = user.displayName;
-//   email = user.email;
-//   photoUrl = user.photoURL;
-//   uid = user.uid;
-
-//   // The user's ID, unique to the Firebase project. Do NOT use this value to authenticate with your backend server, if you have one. Use User.getToken() instead.
-//   console.log('name', name);
-//   console.log('email', email);
-//   console.log('photoUrl', photoUrl);
-//   console.log('uid', uid);
-// }
-
-// firebase.auth().signOut().then(function() {
-//   // Sign-out successful.
-// }, function(error) {
-//   // An error happened.
-// });

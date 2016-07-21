@@ -52,44 +52,22 @@ class ArtifactListView extends Component {
     });
   }
 
-  _handleChangePage() {
-    //this.props.toggleNavBar();
-    this.props.navigator.push({
-      title: "Map View",
-      component: MapViewContainer,
-      passProps: {
-        //toggleNavBar: this.props.toggleNavBar,
-      }
-    });
-
-  }
-
   render() {
 
     return (
-
       <View style={styles.container}>
-      
-        <TouchableWithoutFeedback style={styles.listViewButton} onPress={this._handleChangePage}>
-          <View>
-            <Text>Go to Map View</Text>
-          </View>
-        </TouchableWithoutFeedback>
-
-
-          <ListView ref="listView" style={styles.list} 
-          dataSource={this.state.dataSource}
-          initialListSize={3}
-          scrollRenderAheadDistance={10}
-          renderRow={(rowData) => 
-            <View style={styles.listItem}>
-              <View><Image source={{uri: rowData.imagePath}} style={styles.listImage} /></View>
-              <Text>{rowData.text}</Text>
-              <Text>{rowData.name}</Text>
-              <Text>{rowData.date}</Text>
-            </View> 
-          } 
-          />
+        <ListView ref="listView" style={styles.list} 
+        dataSource={this.state.dataSource}
+        initialListSize={3}
+        scrollRenderAheadDistance={10}
+        renderRow={(rowData) => 
+          <View style={styles.listItem}>
+            <View><Image source={{uri: rowData.imagePath}} style={styles.listImage} /></View>
+            <Text>{rowData.text}</Text>
+            <Text>{rowData.name}</Text>
+            <Text>{rowData.date}</Text>
+          </View> 
+        } />
       </View>
     );
   }
@@ -97,6 +75,7 @@ class ArtifactListView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 60,
     flex:1,
     flexDirection: 'column',
     justifyContent: 'center',
