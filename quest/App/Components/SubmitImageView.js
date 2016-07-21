@@ -26,7 +26,7 @@ class SubmitImageView extends Component {
     return (
       <View style={styles.container}>
         <Image style={styles.mainImage} source={{uri: this.props.path}}/>
-        <TextInput style={styles.caption} placeholder='Add caption'></TextInput>
+        <TextInput multiline={true} style={styles.caption} placeholder='Add caption'></TextInput>
         <TouchableHighlight onPress={() => this._handleSubmit()}>
             <View style={styles.bottomNavButton}>
               <Text style={styles.buttonText}>SUBMIT ARTIFACT</Text>

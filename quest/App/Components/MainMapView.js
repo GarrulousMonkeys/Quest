@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   Image,
+  NativeModules,
   View,
   NavigatorIOS,
   TouchableHighlight,

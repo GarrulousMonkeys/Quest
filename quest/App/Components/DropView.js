@@ -3,6 +3,7 @@ import {
 	StyleSheet,
 	Text,
 	View,
+  TouchableHighlight,
 	TextInput,
 	TouchableWithoutFeedback,
 	AlertIOS
@@ -54,17 +55,16 @@ class DropView extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<TextInput style={styles.textInput}
-					onChangeText={(text) => this.setState({text})}
-					placeholder='Type artifact text here'
-					value={this.state.text}
-				/>
-
-			<TouchableWithoutFeedback onPress={() => this.sendArtifact()}>
-              <View>
-                <Text>Button: Submit Test</Text>
-              </View>
-            </TouchableWithoutFeedback>
+  				<TextInput multiline={true} style={styles.textInput}
+  					onChangeText={(text) => this.setState({text})}
+  					placeholder='Type artifact text here'
+  					value={this.state.text}
+  				/>
+        <TouchableHighlight onPress={() => this.sendArtifact()}>
+          <View style={styles.bottomNavButton}>
+            <Text style={styles.buttonText}>SUBMIT ARTIFACT</Text>
+          </View>
+        </TouchableHighlight>
 			</View>
 		)
 	}
@@ -72,16 +72,30 @@ class DropView extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: 'aqua',
-		padding: 20,
-		justifyContent: 'center',
-		alignItems: 'center'
+    flex: 1,
+		backgroundColor: 'white',
+		justifyContent: 'flex-end',
 	},
 	textInput: {
 		flex: 1,
-		flexDirection: 'row'
-	}
+    fontSize: 30,
+    padding: 10,
+    paddingTop: 200,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+	},
+  bottomNavButton: {
+    flex: 1,
+    backgroundColor: "#24CE84",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: 30,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 30
+  }
 });
 
-export { DropView }
+export { DropView };

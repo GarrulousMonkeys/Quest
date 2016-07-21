@@ -13,6 +13,7 @@ import { SubmitImageView } from './App/Components/SubmitImageView';
 import {
   AppRegistry,
   StyleSheet,
+  NativeModules,
   Navigator,
 } from 'react-native';
 

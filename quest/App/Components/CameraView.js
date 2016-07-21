@@ -7,6 +7,7 @@ import {
   TextInput,
   Slider,
   Dimensions,
+  NativeModules,
   Image,
   TouchableOpacity,
   TouchableHighlight,
