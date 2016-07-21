@@ -68,6 +68,7 @@ class CameraRollView extends Component {
     }
   }
   getSelectedImage(selectedImage, currentImage) {
+    console.log(this.state.selected[0].uri);
     let num = selectedImage.length;
     this.setState({
       num: num,
@@ -81,7 +82,8 @@ class CameraRollView extends Component {
   }
   handleSubmit(name) {
    this.props.navigator.push({
-      name: 'SubmitImageView'
+      name: name,
+      path: this.state.selected[0].uri
     });
   }
   buttonShow() {

@@ -52,10 +52,12 @@ class quest extends Component {
 
   renderScene(route, navigator) {
     let Component = ROUTES[route.name];
+    let path = route.path || null;
     return (
       <Component 
         route={route}
         dbRef={this.state.dbRef}
+        path={path}
         storageRef={this.state.storageRef}
         navigator={navigator} />
     );

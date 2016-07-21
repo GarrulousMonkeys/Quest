@@ -14,8 +14,8 @@ import {
 } from 'react-native';
 
 class SubmitImageView extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   _handleSubmit() {
@@ -25,7 +25,7 @@ class SubmitImageView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.mainImage} source={{uri: 'https://media.giphy.com/media/3o6UBo8U2iHUG5mszS/giphy.gif'}}/>
+        <Image style={styles.mainImage} source={{uri: this.props.path}}/>
         <TextInput style={styles.caption} placeholder='Add caption'></TextInput>
         <TouchableHighlight onPress={() => this._handleSubmit()}>
             <View style={styles.bottomNavButton}>
