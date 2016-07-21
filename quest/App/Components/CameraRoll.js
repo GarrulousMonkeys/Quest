@@ -67,27 +67,18 @@ class CameraRollExample extends Component {
       imageSelected: false,
     }
   }
-  getSelectedImage(images) {
-    let num = images.length;
+  getSelectedImage(selectedImage, currentImage) {
+    let num = selectedImage.length;
     this.setState({
       num: num,
-      selected: images
+      selected: selectedImage
     });
-    this.selectChecker()
-  }
-  selectChecker() {
-    console.log(this.state.imageSelected);
-    if(this.state.num > 0) {
-      this.setState({
-        imageSelected: false
-      });
-    } else if (this.state.num === 0) {
-      this.setState({
-        imageSelected: true
-      });
+    if (!this.state.selected[0]) {
+      this.setState({imageSelected: false})
+    } else if (this.state.selected[0] && currentImage.uri === this.state.selected[0].uri) {
+      this.setState({imageSelected: true})
     }
   }
-
   handleSubmit() {
     console.log('HANDLING SUBMIT');
     // this is where we submit to db???
