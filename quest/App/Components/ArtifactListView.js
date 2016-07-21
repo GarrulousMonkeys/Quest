@@ -31,24 +31,25 @@ class ArtifactListView extends Component {
       snapshot.forEach((rawArtifact) => {
         var artifact = rawArtifact.val();
 
-        this.props.storageRef.child('images/' + artifact.artifactID + '.jpg').getDownloadURL().then(function(url) {
+        //this.props.storageRef.child('images/' + artifact.artifactID + '.jpg').getDownloadURL().then(function(url) {
 
           parsedItems.push({
             name: artifact.user,
             date: (new Date(artifact.timestamp)).toString().substring(0, 24),
             text: artifact.message,
-            imagePath: url
+            imagePath: artifact.base64
           });
 
-        this.setState({
-            dataSource: this.ds.cloneWithRows(parsedItems)
-          });
-
-        }.bind(this)).catch(function(error) {
-          console.log(error);
-        });
+        // }.bind(this)).catch(function(error) {
+        //   console.log(error);
+        // });
 
       });
+
+      this.setState({
+        dataSource: this.ds.cloneWithRows(parsedItems)
+      });
+      
     });
   }
 
