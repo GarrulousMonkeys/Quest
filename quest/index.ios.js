@@ -18,6 +18,7 @@ import {
 
 // Initialize Firebase
 import { ENV } from './environment/environment';
+//var ENV = require('./environment/environment');
 const firebaseApp = firebase.initializeApp(ENV);
 
 // Initialize Routes
@@ -47,24 +48,6 @@ class quest extends Component {
       dbRef: firebaseApp.database().ref(),
       storageRef: firebaseApp.storage().ref() 
     }
-  }
-
-  componentDidMount() {
-      this.listenForData(this.state.dbRef);
-  }
-
-  listenForData(dbRef) {
-    dbRef.on('value', (newRawData) => {
-      //get new data elements and do something with them
-      var newItems = [];
-      newRawData.forEach((item) => {
-        //AlertIOS.alert('New value entered');
-      });
-      //Uncomment when we have real user data in the Firebase database
-      // this.setState({
-      //   dataSource: this.state.dataSource.cloneWithRows(newItems)
-      // });
-    });
   }
 
   renderScene(route, navigator) {

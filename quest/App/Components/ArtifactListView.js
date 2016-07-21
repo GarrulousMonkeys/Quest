@@ -14,14 +14,41 @@ class ArtifactListView extends Component {
   constructor(props) {
     super(props)
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-59bd0.appspot.com/o/images%2Fimage1.jpg?alt=media&token=67db7111-57eb-4a13-99d0-35d5865db2d6'},
-        {name: 'James Buchanan', date: 'July 14, 2016 11:31am', text:'sunny day at dolores = <3 <3 <3', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-59bd0.appspot.com/o/images%2Fimage2.jpg?alt=media&token=155db632-74e2-4811-98a8-09c599229df0'},
-        {name: 'John Wilson', date: 'July 15, 2016 10:04am', text:'Dolores park is awesome', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-59bd0.appspot.com/o/images%2Fimage3.png?alt=media&token=89b366ea-1b02-4bfb-bc12-7af37be66f86'}
+      dataSource: this.ds.cloneWithRows([
+        {name: 'Loading...', date: 'Loading...', text:'Loading...', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-59bd0.appspot.com/o/images%2Fimage1.jpg?alt=media&token=67db7111-57eb-4a13-99d0-35d5865db2d6'}
       ])
-    }
+    };
+  }
+
+  componentDidMount() {
+
+    this.props.dbRef.on('value', (snapshot) => {
+      var parsedItems = [];
+
+      snapshot.forEach((rawArtifact) => {
+        var artifact = rawArtifact.val();
+
+        this.props.storageRef.child('images/' + artifact.artifactID + '.jpg').getDownloadURL().then(function(url) {
+
+          parsedItems.push({
+            name: artifact.user,
+            date: (new Date(artifact.timestamp)).toString().substring(0, 24),
+            text: artifact.message,
+            imagePath: url
+          });
+
+        this.setState({
+            dataSource: this.ds.cloneWithRows(parsedItems)
+          });
+
+        }.bind(this)).catch(function(error) {
+          console.log(error);
+        });
+
+      });
+    });
   }
 
   _handleChangePage() {
