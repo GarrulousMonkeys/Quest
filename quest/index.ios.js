@@ -5,7 +5,7 @@ import { SignUpView } from './App/Components/SignUpView';
 import { MainMapView } from './App/Components/MainMapView';
 import { ProfileView } from './App/Components/ProfileView';
 import { ArtifactListView } from './App/Components/ArtifactListView';
-import { DropView } from './App/Components/DropviewChange';
+import { DropView } from './App/Components/DropView';
 import { CameraView } from './App/Components/CameraView';
 import { CameraRollView } from './App/Components/CameraRollView';
 import {
