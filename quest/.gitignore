@@ -23,7 +23,7 @@ DerivedData
 project.xcworkspace
 
 #environment
-environment
+quest/environment/
 
 # Android/IJ
 #
