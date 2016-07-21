@@ -14,6 +14,8 @@ import {
   ScrollView
 } from 'react-native';
 import Camera from 'react-native-camera';
+import { CameraRollExample } from './CameraRollView';
+
 class CameraView extends Component {
   constructor(props) {
     super(props);
@@ -23,9 +25,16 @@ class CameraView extends Component {
   }
   takePicture() {
     this.camera.capture()
-      .then((data) => this.setState({ picture: data }))
+      .then((data) => console.log(data))
       .catch(err => console.error(err));
   }
+
+  _handleNextPage(name) {
+    this.props.navigator.push({
+      name: name
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,12 +44,14 @@ class CameraView extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-            <TouchableHighlight>
+            <TouchableHighlight onPress={() => this._handleNextPage('CameraRollView')}>
               <View style={styles.goToCameraRoll}>
                 <Text style={styles.cameraRollText}>CAMERAROLL</Text>
               </View>
             </TouchableHighlight>
-          <View style={styles.capture} onPress={this.takePicture.bind(this)}></View>
+          <TouchableHighlight onPress={this.takePicture.bind(this)}>
+            <View style={styles.capture}></View>
+          </TouchableHighlight>
         </Camera>
       </View>
     )
