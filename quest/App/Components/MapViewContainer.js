@@ -3,6 +3,8 @@ import { ArtifactList } from './ArtifactListView';
 import { Profile } from './ProfileView';
 import { Dropview } from './Dropview';
 import { CameraRollExample } from './CameraRoll';
+import { CameraView } from './CameraView';
+
 
 import {
   AppRegistry,
@@ -81,6 +83,11 @@ class MapViewContainer extends Component {
             <TouchableWithoutFeedback onPress={() => this._handleChangePage('Camera Roll', CameraRollExample)}>
               <View style={styles.bottomNavButton}>
                 <Text>Button: Camera Roll</Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => this._handleChangePage('Camera', CameraView)}>
+              <View style={styles.bottomNavButton}>
+                <Text>Button: Camera</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => this._handleChangePage('Artifact List View', ArtifactList)}>

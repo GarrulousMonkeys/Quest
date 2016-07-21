@@ -76,18 +76,24 @@ class CameraRollExample extends Component {
     this.selectChecker()
   }
   selectChecker() {
+    console.log(this.state.imageSelected);
     if(this.state.num > 0) {
       this.setState({
         imageSelected: false
       });
-    } else {
+    } else if (this.state.num === 0) {
       this.setState({
         imageSelected: true
       });
     }
   }
+
+  handleSubmit() {
+    console.log('HANDLING SUBMIT');
+    // this is where we submit to db???
+  }
   buttonShow() {
-    return this.state.imageSelected ? <TouchableHighlight>
+    return this.state.imageSelected ? <TouchableHighlight onPress={this.handleSubmit.bind(this)}>
             <View style={styles.bottomNavButton}>
               <Text style={styles.buttonText}>SELECT</Text>
             </View>
