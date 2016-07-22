@@ -18,7 +18,7 @@ class ArtifactListView extends Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: this.ds.cloneWithRows([
-        {name: 'Loading...', date: 'Loading...', text:'Loading...', imagePath: 'https://firebasestorage.googleapis.com/v0/b/quest-59bd0.appspot.com/o/images%2Fimage1.jpg?alt=media&token=67db7111-57eb-4a13-99d0-35d5865db2d6'}
+        {}
       ])
     };
   }
@@ -31,24 +31,34 @@ class ArtifactListView extends Component {
       snapshot.forEach((rawArtifact) => {
         var artifact = rawArtifact.val();
 
-        this.props.storageRef.child('images/' + artifact.artifactID + '.jpg').getDownloadURL().then(function(url) {
-
           parsedItems.push({
             name: artifact.user,
-            date: (new Date(artifact.timestamp)).toString().substring(0, 24),
+            date: artifact.timestamp,
             text: artifact.message,
-            imagePath: url
+            imagePath: artifact.base64
           });
-
-        this.setState({
-            dataSource: this.ds.cloneWithRows(parsedItems)
-          });
-
-        }.bind(this)).catch(function(error) {
-          console.log(error);
-        });
 
       });
+
+      parsedItems.sort(function(a, b) {
+        if(a.date > b.date) {
+          return -1;
+        }
+        if(a.date < b.date) {
+          return 1;
+        }
+        return 0;  
+      });
+
+      parsedItems.forEach(function(item) {
+        var stringDate = (new Date(item.date)).toString().substring(0, 24);
+        item.date = stringDate;
+      });
+
+      this.setState({
+        dataSource: this.ds.cloneWithRows(parsedItems)
+      });
+      
     });
   }
 
