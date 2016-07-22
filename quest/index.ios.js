@@ -102,11 +102,13 @@ class quest extends Component {
   renderScene(route, navigator) {
     let Component = ROUTES[route.name];
     let path = route.path || null;
+    let base64 = route.base64 || null;
     return (
       <Component
         route={route}
         path={path}
         dbRef={this.state.dbRef}
+        base64={base64}
         storageRef={this.state.storageRef}
         navigator={navigator} />
     );
