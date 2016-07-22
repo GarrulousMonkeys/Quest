@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 import { SubmitImageView } from './SubmitImageView';
 import CameraRollPicker from 'react-native-camera-roll-picker';
+import ReadTheData from 'NativeModules';
+let ReadImageData = ReadTheData.ReadImageData;
 
 const styles = StyleSheet.create({
   container: {
@@ -87,7 +89,7 @@ class CameraRollView extends Component {
 
   handleSubmit(name) {
     if (this.state.selected[0]) {
-      NativeModules.ReadImageData.readImage(this.state.selected[0].uri, (image) => {
+      ReadImageData.readImage(this.state.selected[0].uri, (image) => {
         this.setState({ base64: 'data:image/jpeg;base64,' + image });
         this.props.navigator.push({
           name: name,
