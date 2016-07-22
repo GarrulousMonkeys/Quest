@@ -66,11 +66,13 @@ class CameraRollView extends Component {
       selected: [],
       num: 0,
       imageSelected: false,
+      base64: ''
     }
   }
 
 
   getSelectedImage(selectedImage, currentImage) {
+    console.log(this.state.selectedImage);
     let num = selectedImage.length;
     this.setState({
       num: num,
@@ -85,12 +87,13 @@ class CameraRollView extends Component {
 
   handleSubmit(name) {
     if (this.state.selected[0]) {
+      NativeModules.ReadImageData.readImage(this.state.selected[0].uri, (image) => {
+        this.setState({ base64: 'data:image/jpeg;base64,' + image });
+      });
       this.props.navigator.push({
         name: name,
-        path: this.state.selected[0].uri
-      });
-      NativeModules.ReadImageData.readImage(this.state.selected[0].uri, (image) => {
-        console.log(image);
+        path: this.state.selected[0].uri,
+        base64: this.state.base64
       });
     }
   }

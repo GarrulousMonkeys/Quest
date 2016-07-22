@@ -21,20 +21,28 @@ class CameraView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      path: ''
+      path: '',
+      base64: ''
     }
   }
+
   takePicture() {
     this.camera.capture()
       .then((data) => this.setState({ path: data.path }))
-      .then(() => this._handleNextPage('SubmitImageView'))
+      .then(() => NativeModules.ReadImageData.readImage(this.state.path, (image) => {
+        this.setState({ base64: 'data:image/jpeg;base64,' + image });
+        console.log(this.state.base64);
+        this._handleNextPage('SubmitImageView');
+      }))
       .catch(err => console.error(err));
   }
 
   _handleNextPage(name) {
+    console.log(this.state.path + ' AND ' + this.state.base64);
     this.props.navigator.push({
       name: name,
-      path: this.state.path
+      path: this.state.path,
+      base64: this.state.base64
     });
   }
 

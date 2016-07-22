@@ -49,7 +49,7 @@ class DropView extends Component {
 		//Reference for photo uploading: 
 		//https://github.com/firebase/quickstart-js/blob/master/storage/index.html
 		*/
-	
+	 this.props.navigator.popToTop();
 	}
 	
 	render() {
