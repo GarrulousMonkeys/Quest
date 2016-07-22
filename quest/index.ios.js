@@ -33,12 +33,25 @@ const ROUTES = {
   CameraView: CameraView,
   CameraRollView: CameraRollView,
   SubmitImageView: SubmitImageView
-}
+};
+
+const TITLES = {
+  SignInView: 'Sign In',
+  SignUpView: 'Sign Up',
+  MainMapView: 'Map',
+  ProfileView: 'Profile',
+  ArtifactListView: 'Artifact List',
+  DropView: 'Drop Artifact',
+  CameraView: 'Camera',
+  CameraRollView: 'Camera Roll',
+  SubmitImageView: 'Submit Artifact'
+};
 
 // NavBar Routes
 const NavigationBarRouteMapper = {
-  Title: (route, navigator, index, navState) => { 
-    return (<Text style={styles.title}>{route.name}</Text>); 
+  Title: (route, navigator, index, navState) => {
+    let title = TITLES[route.name];
+    return (<Text style={styles.title}>{title}</Text>); 
   },
   LeftButton: (route, navigator, index, navState) => {
     if (index === 0) {

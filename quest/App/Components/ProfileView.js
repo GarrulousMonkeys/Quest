@@ -9,6 +9,64 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 60,
+    flex: 1
+  },
+  rowContainer: {
+    paddingTop: 10,
+    marginTop: 10
+  },
+  contentContainer: {
+    margin: 5,
+    alignItems: 'stretch'
+  },
+  listImage: {
+     height: 200
+  },
+  headerContainer: {
+    backgroundColor: '#48BBEC',
+    paddingBottom: 10
+  },
+  name: {
+    alignSelf: 'center',
+    fontSize: 22,
+    marginTop: 10,
+    marginBottom: 5,
+    color: 'white'
+  },
+  artifacts: {
+    alignSelf: 'center',
+    fontSize: 16,
+    color: 'white'
+  },
+  image: {
+    height: 125,
+    width: 125,
+    borderRadius: 65,
+    marginTop: 10,
+    alignSelf: 'center'
+  },
+  logout: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontSize: 20,
+    color: 'white'
+  },
+  button: {
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    marginBottom: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    backgroundColor: '#ef5350',
+  }
+})
+
 class ProfileView extends Component {
   
   constructor(props) {
@@ -82,64 +140,5 @@ class ProfileView extends Component {
     ); 
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 60,
-    flex: 1
-  },
-  rowContainer: {
-    paddingTop: 10,
-    marginTop: 10
-  },
-  contentContainer: {
-    margin: 5,
-    alignItems: 'stretch'
-  },
-  listImage: {
-     height: 200
-  },
-  headerContainer: {
-    backgroundColor: '#48BBEC',
-    paddingBottom: 10
-  },
-  name: {
-    alignSelf: 'center',
-    fontSize: 22,
-    marginTop: 10,
-    marginBottom: 5,
-    color: 'white'
-  },
-  artifacts: {
-    alignSelf: 'center',
-    fontSize: 16,
-    color: 'white'
-  },
-  image: {
-    height: 125,
-    width: 125,
-    borderRadius: 65,
-    marginTop: 10,
-    alignSelf: 'center'
-  },
-  logout: {
-    justifyContent: 'center',
-    alignSelf: 'center',
-    fontSize: 20,
-    color: 'white'
-  },
-  button: {
-    height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    marginBottom: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 10,
-    backgroundColor: '#ef5350',
-  }
-})
 
 export { ProfileView };

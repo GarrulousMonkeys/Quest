@@ -135,7 +135,7 @@ class SignUpView extends Component {
           style={ styles.button }
           underlayColor='gray'
           onPress={ this._handleSignUp.bind(this) } >
-          <Text style={ styles.buttonText }>SIGN UP</Text>
+          <Text style={ styles.buttonText }>Sign Up</Text>
         </TouchableHighlight>
         <TouchableHighlight 
           onPress={  this._handleToSignIn.bind(this) }>
