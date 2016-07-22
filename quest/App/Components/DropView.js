@@ -9,6 +9,34 @@ import {
 	AlertIOS
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+  },
+  textInput: {
+    flex: 1,
+    fontSize: 30,
+    padding: 10,
+    paddingTop: 200,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bottomNavButton: {
+    flex: 1,
+    backgroundColor: "#24CE84",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: 30,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 30
+  }
+});
+
 class DropView extends Component {
 	constructor(props){
 		super(props)
@@ -69,33 +97,5 @@ class DropView extends Component {
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-    flex: 1,
-		backgroundColor: 'white',
-		justifyContent: 'flex-end',
-	},
-	textInput: {
-		flex: 1,
-    fontSize: 30,
-    padding: 10,
-    paddingTop: 200,
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-	},
-  bottomNavButton: {
-    flex: 1,
-    backgroundColor: "#24CE84",
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: 30,
-  },
-  buttonText: {
-    color: '#FFF',
-    fontSize: 30
-  }
-});
 
 export { DropView };
