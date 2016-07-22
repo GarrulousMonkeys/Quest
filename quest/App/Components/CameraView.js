@@ -19,58 +19,6 @@ import { CameraRollExample } from './CameraRollView';
 import ReadTheData from 'NativeModules';
 let ReadImageData = ReadTheData.ReadImageData;
 
-class CameraView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      path: '',
-      base64: ''
-    }
-  }
-
-  takePicture() {
-    this.camera.capture()
-      .then((data) => this.setState({ path: data.path }))
-      .then(() => ReadImageData.readImage(this.state.path, (image) => {
-        this.setState({ base64: 'data:image/jpeg;base64,' + image });
-        console.log(this.state.base64);
-        this._handleNextPage('SubmitImageView');
-      }))
-      .catch(err => console.error(err));
-  }
-
-  _handleNextPage(name) {
-    console.log(this.state.path + ' AND ' + this.state.base64);
-    this.props.navigator.push({
-      name: name,
-      path: this.state.path,
-      base64: this.state.base64
-    });
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-            <TouchableHighlight onPress={() => this._handleNextPage('CameraRollView')}>
-              <View style={styles.goToCameraRoll}>
-                <Text style={styles.cameraRollText}>CAMERAROLL</Text>
-              </View>
-            </TouchableHighlight>
-          <TouchableHighlight onPress={this.takePicture.bind(this)}>
-            <View style={styles.capture}></View>
-          </TouchableHighlight>
-        </Camera>
-      </View>
-    )
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -107,5 +55,55 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0)'
   }
 });
+
+class CameraView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      path: '',
+      base64: ''
+    }
+  }
+
+  takePicture() {
+    this.camera.capture()
+      .then((data) => this.setState({ path: data.path }))
+      .then(() => ReadImageData.readImage(this.state.path, (image) => {
+        this.setState({ base64: 'data:image/jpeg;base64,' + image });
+        this._handleNextPage('SubmitImageView');
+      }))
+      .catch(err => console.error(err));
+  }
+
+  _handleNextPage(name) {
+    this.props.navigator.push({
+      name: name,
+      path: this.state.path,
+      base64: this.state.base64
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+            <TouchableHighlight onPress={() => this._handleNextPage('CameraRollView')}>
+              <View style={styles.goToCameraRoll}>
+                <Text style={styles.cameraRollText}>CAMERAROLL</Text>
+              </View>
+            </TouchableHighlight>
+          <TouchableHighlight onPress={this.takePicture.bind(this)}>
+            <View style={styles.capture}></View>
+          </TouchableHighlight>
+        </Camera>
+      </View>
+    )
+  }
+}
 
 export { CameraView }; 

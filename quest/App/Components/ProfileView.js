@@ -36,15 +36,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: 'white'
   },
-  artifacts: {
-    alignSelf: 'center',
-    fontSize: 16,
-    color: 'white'
-  },
   image: {
-    height: 125,
-    width: 125,
-    borderRadius: 65,
+    backgroundColor: 'white',
+    height: 145,
+    width: 145,
+    borderRadius: 30,
     marginTop: 10,
     alignSelf: 'center'
   },
@@ -59,10 +55,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'stretch',
-    marginBottom: 10,
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10,
+    marginBottom: 10,
     backgroundColor: '#ef5350',
   }
 })
@@ -74,26 +70,55 @@ class ProfileView extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     
     this.state = {
-     dataSource: ds.cloneWithRows([
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'},
-        {name: 'Joel Smith', date: 'July 14, 2016 2:36pm', text:'best icecream ever at birite', imagePath: 'https://cdn1.vox-cdn.com/uploads/chorus_image/image/47931859/C_CitySFDoloresPkLg.0.jpg'}
-      ])
+      user: firebase.auth().currentUser,
+      dataSource: ds.cloneWithRows([{}])
     }
   }
 
+  componentDidMount() {
+    //TODO: Query database to grab user artifacts 
+    //console.log('this.state.user.uid', this.state.user.uid);
+    // this.props.dbRef.orderByChild("user").equalTo(this.state.user.uid).on("value", function(snapshot) {
+    //  var parsedItems = [];
+
+    //  snapshot.forEach((rawArtifact) => {
+    //    var artifact = rawArtifact.val();
+
+    //      parsedItems.push({
+    //        name: artifact.user,
+    //        date: artifact.timestamp,
+    //        text: artifact.message,
+    //        imagePath: artifact.base64
+    //      });
+
+    //      parsedItems.sort(function(a, b) {
+    //        if(a.date > b.date) {
+    //          return -1;
+    //        }
+    //        if(a.date < b.date) {
+    //          return 1;
+    //        }
+    //        return 0;  
+    //      });
+
+    //      parsedItems.forEach(function(item) {
+    //        var stringDate = (new Date(item.date)).toString().substring(0, 24);
+    //        item.date = stringDate;
+    //      });
+
+    //  });
+
+    //  this.setState({
+    //    dataSource: this.ds.cloneWithRows(parsedItems)
+    //  });
+     
+    // });
+  }
+
+
   _handleLogOut() {
     firebase.auth().signOut().then(() => {
-      console.log('bye');
-
       this.props.navigator.resetTo({name: 'SignInView'});
-
     },(error) => {
       console.log(error);
     });
@@ -104,9 +129,8 @@ class ProfileView extends Component {
       <View style={styles.headerContainer}>
         <Image 
           style={styles.image} 
-          source={{uri: 'https://www.petfinder.com/wp-content/uploads/2012/11/152132425-newly-adopted-dog-632x475.jpg'}} />
-        <Text style={styles.name}> Joel Smith </Text>
-        <Text style={styles.artifacts}> Number of Artifacts: 9 </Text>
+          source={{uri: 'https://d30y9cdsu7xlg0.cloudfront.net/png/1685-200.png'}} />
+        <Text style={styles.name}> {this.state.user.displayName} </Text>
         <TouchableHighlight 
           style={ styles.button }
           underlayColor='gray'

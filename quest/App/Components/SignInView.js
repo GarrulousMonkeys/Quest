@@ -83,19 +83,16 @@ class SignInView extends Component {
 
   _handleSignIn() {
     let email = this.state.email.trim();
-    let password = this.state.password;
+    let password = this.state.password.trim();
 
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ email: '', password: '' });
-        this._handleAuth();
-      })
-      .catch((error) => {
-        console.log('Error Code:', error.code);
-        console.log('Error Message:', error.message);
-        this.setState({ password:'', error: error.message });
-    });    
+        .then(() => {
+          this._handleAuth();
+        })
+        .catch((error) => {
+          this.setState({ password:'', error: error.message });
+        });    
   }
 
   _handleAuth(){

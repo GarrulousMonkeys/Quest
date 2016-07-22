@@ -10,6 +10,34 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 44,
+    flex:1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'white',
+    paddingTop:20
+  }, 
+  list: {
+    flex:1
+  }, 
+  listViewButton: {
+    flex:1,
+    paddingTop:20,
+    marginTop: 20
+  },
+  listImage: {
+    width:380,
+    height:169
+  }, 
+  listItem: {
+    borderWidth: 0.5, 
+    borderColor: '#d6d7da'
+  }
+});
+
 class ArtifactListView extends Component {
   
   constructor(props) {
@@ -17,9 +45,7 @@ class ArtifactListView extends Component {
 
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: this.ds.cloneWithRows([
-        {}
-      ])
+      dataSource: this.ds.cloneWithRows([{}])
     };
   }
 
@@ -82,34 +108,6 @@ class ArtifactListView extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 60,
-    flex:1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    backgroundColor: 'white',
-    paddingTop:20
-  }, 
-  list: {
-    flex:1
-  }, 
-  listViewButton: {
-    flex:1,
-    paddingTop:20,
-    marginTop: 20
-  },
-  listImage: {
-    width:380,
-    height:169
-  }, 
-  listItem: {
-    borderWidth: 0.5, 
-    borderColor: '#d6d7da'
-  }
-});
 
 export {ArtifactListView}
 

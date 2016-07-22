@@ -12,10 +12,9 @@ import { SubmitImageView } from './App/Components/SubmitImageView';
 import {
   AppRegistry,
   StyleSheet,
-  NativeModules,
   Navigator,
-  TouchableHighlight,
-  Text
+  Text,
+  TouchableHighlight
 } from 'react-native';
 
 // Initialize Firebase
@@ -67,7 +66,7 @@ const NavigationBarRouteMapper = {
     }
   },
   RightButton: (route, navigator, index, navState) => {
-    return null 
+    return null;
   }
 };
 
@@ -79,11 +78,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9'
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     padding: 10
   },
   back: {
-    fontSize: 16,
+    fontSize: 20,
     color: '#03a9f4',
     padding: 10
   }
@@ -107,8 +106,8 @@ class quest extends Component {
       <Component
         route={route}
         path={path}
-        dbRef={this.state.dbRef}
         base64={base64}
+        dbRef={this.state.dbRef}
         storageRef={this.state.storageRef}
         navigator={navigator} />
     );

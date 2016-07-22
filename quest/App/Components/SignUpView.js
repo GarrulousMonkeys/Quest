@@ -76,6 +76,7 @@ class SignUpView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email: '',
       password: '',
       error: ''
@@ -83,20 +84,27 @@ class SignUpView extends Component {
   }
 
   _handleSignUp() {
+    let name = this.state.name.trim();
     let email = this.state.email.trim();
-    let password = this.state.password;
+    let password = this.state.password.trim();
 
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ email: '', password: '' });
-        this._handleAuth();
-      })
-      .catch((error) => {
-        console.log('Error Code:', error.code);
-        console.log('Error Message:', error.message);
-        this.setState({ password: '', error: error.message });
-    });
+        .then(() => {
+
+          let user = firebase.auth().currentUser;
+          user.updateProfile({ displayName: name })
+            .then(()=>{
+              this._handleAuth();
+            })
+            .catch((error)=> {
+              console.log(error);
+            });
+
+        })
+        .catch((error) => {
+          this.setState({ password: '', error: error.message });
+      });
   }
 
   _handleAuth(){
@@ -120,6 +128,11 @@ class SignUpView extends Component {
       <Image style={ styles.bgImage } 
       source={{uri: 'https://media.giphy.com/media/IuKnqFMhtcA2A/giphy.gif'}}>
         <Text style={ styles.title }>Quest</Text>
+        <TextInput 
+          style={ styles.searchInput }
+          value ={ this.state.name }
+          onChangeText={ (name) => this.setState({name}) } 
+          placeholder='name'/>
         <TextInput 
           style={ styles.searchInput }
           value ={ this.state.email }
