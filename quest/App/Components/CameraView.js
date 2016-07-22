@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 import { CameraRollExample } from './CameraRollView';
+import ReadTheData from 'NativeModules';
+let ReadImageData = ReadTheData.ReadImageData;
 
 class CameraView extends Component {
   constructor(props) {
@@ -29,7 +31,7 @@ class CameraView extends Component {
   takePicture() {
     this.camera.capture()
       .then((data) => this.setState({ path: data.path }))
-      .then(() => NativeModules.ReadImageData.readImage(this.state.path, (image) => {
+      .then(() => ReadImageData.readImage(this.state.path, (image) => {
         this.setState({ base64: 'data:image/jpeg;base64,' + image });
         console.log(this.state.base64);
         this._handleNextPage('SubmitImageView');
