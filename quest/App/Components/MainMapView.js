@@ -14,6 +14,27 @@ import {
   MapView
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  mapContainer: {
+    flex:1
+  }, 
+  bottomNav: { 
+    flex:2,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  map: {
+    height:400,
+    flex: 5
+  },
+  bottomNavButton: {
+    flex:1,
+    backgroundColor: "#d3d3d3",
+    alignItems: 'center',
+    borderWidth: 1
+  }
+});
+
 class MainMapView extends Component {
 
   constructor(props) {
@@ -31,13 +52,11 @@ class MainMapView extends Component {
   }
 
   componentDidMount() {
-    this.setState({visible:true});
 
     this.props.dbRef.on('value', (snapshot) => {
 
       var parsedItems = [];
       snapshot.forEach((rawArtifact) => {
-        //console.log(rawArtifact.val());
         var artifact = rawArtifact.val();
 
         parsedItems.push({
@@ -56,19 +75,7 @@ class MainMapView extends Component {
   }
   
   _handleNextPage(componentName) {
-
     this.props.navigator.push({name: componentName});
-
-    // //this.props.toggleNavBar();
-    // this.props.navigator.push({
-    //   title: title,
-    //   component: component,
-    //   passProps: {
-    //     dbRef: this.props.dbRef,
-    //     storageRef: this.props.storageRef
-    //     //toggleNavBar: this.props.toggleNavBar,
-    //   }
-    // });
   }
 
   render() {
@@ -119,27 +126,5 @@ class MainMapView extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  mapContainer: {
-    flex:1
-  }, 
-  bottomNav: { 
-    flex:2,
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  map: {
-    height:400,
-    flex: 5
-  },
-  bottomNavButton: {
-    flex:1,
-    backgroundColor: "#d3d3d3",
-    alignItems: 'center',
-    borderWidth: 1
-  }
-});
-
 
 export {MainMapView};
