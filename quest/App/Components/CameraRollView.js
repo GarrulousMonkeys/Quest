@@ -6,7 +6,6 @@ import {
   CameraRoll,
   TextInput,
   Slider,
-  NativeModules,
   Image,
   TouchableOpacity,
   TouchableHighlight,
