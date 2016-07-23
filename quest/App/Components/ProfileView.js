@@ -67,52 +67,53 @@ class ProfileView extends Component {
   
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    
+    this.user = firebase.auth().currentUser;
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      user: firebase.auth().currentUser,
-      dataSource: ds.cloneWithRows([{}])
+      dataSource: this.ds.cloneWithRows([{}])
     }
   }
 
   componentDidMount() {
-    //TODO: Query database to grab user artifacts 
-    //console.log('this.state.user.uid', this.state.user.uid);
-    // this.props.dbRef.orderByChild("user").equalTo(this.state.user.uid).on("value", function(snapshot) {
-    //  var parsedItems = [];
 
-    //  snapshot.forEach((rawArtifact) => {
-    //    var artifact = rawArtifact.val();
+    this.props.dbRef.orderByChild("user")
+      .equalTo(this.user.displayName)
+      .on('value', (snapshot) => {
+        
+        let parsedItems = [];
 
-    //      parsedItems.push({
-    //        name: artifact.user,
-    //        date: artifact.timestamp,
-    //        text: artifact.message,
-    //        imagePath: artifact.base64
-    //      });
+        snapshot.forEach((rawArtifact) => {
+          let artifact = rawArtifact.val();
 
-    //      parsedItems.sort(function(a, b) {
-    //        if(a.date > b.date) {
-    //          return -1;
-    //        }
-    //        if(a.date < b.date) {
-    //          return 1;
-    //        }
-    //        return 0;  
-    //      });
+            parsedItems.push({
+              name: artifact.user,
+              date: artifact.timestamp,
+              text: artifact.message,
+              imagePath: artifact.base64
+            });
 
-    //      parsedItems.forEach(function(item) {
-    //        var stringDate = (new Date(item.date)).toString().substring(0, 24);
-    //        item.date = stringDate;
-    //      });
+        });
 
-    //  });
+        parsedItems.sort((a, b) => {
+          if(a.date > b.date) {
+            return -1;
+          }
+          if(a.date < b.date) {
+            return 1;
+          }
+          return 0;  
+        });
 
-    //  this.setState({
-    //    dataSource: this.ds.cloneWithRows(parsedItems)
-    //  });
-     
-    // });
+        parsedItems.forEach((item) => {
+          let stringDate = (new Date(item.date)).toString().substring(0, 24);
+          item.date = stringDate;
+        });
+
+        this.setState({
+          dataSource: this.ds.cloneWithRows(parsedItems)
+        });
+      
+    });
   }
 
 
@@ -130,7 +131,7 @@ class ProfileView extends Component {
         <Image 
           style={styles.image} 
           source={{uri: 'https://d30y9cdsu7xlg0.cloudfront.net/png/1685-200.png'}} />
-        <Text style={styles.name}> {this.state.user.displayName} </Text>
+        <Text style={styles.name}> {this.user.displayName} </Text>
         <TouchableHighlight 
           style={ styles.button }
           underlayColor='gray'

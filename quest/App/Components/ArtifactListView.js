@@ -42,7 +42,6 @@ class ArtifactListView extends Component {
   
   constructor(props) {
     super(props)
-
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: this.ds.cloneWithRows([{}])
@@ -52,10 +51,10 @@ class ArtifactListView extends Component {
   componentDidMount() {
 
     this.props.dbRef.on('value', (snapshot) => {
-      var parsedItems = [];
+      let parsedItems = [];
 
       snapshot.forEach((rawArtifact) => {
-        var artifact = rawArtifact.val();
+        let artifact = rawArtifact.val();
 
           parsedItems.push({
             name: artifact.user,
@@ -66,7 +65,7 @@ class ArtifactListView extends Component {
 
       });
 
-      parsedItems.sort(function(a, b) {
+      parsedItems.sort((a, b) => {
         if(a.date > b.date) {
           return -1;
         }
@@ -76,8 +75,8 @@ class ArtifactListView extends Component {
         return 0;  
       });
 
-      parsedItems.forEach(function(item) {
-        var stringDate = (new Date(item.date)).toString().substring(0, 24);
+      parsedItems.forEach((item) => {
+        let stringDate = (new Date(item.date)).toString().substring(0, 24);
         item.date = stringDate;
       });
 

@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
 class SubmitImageView extends Component {
   constructor(props) {
     super(props);
+    this.user = firebase.auth().currentUser;
     this.state = {
-      user: firebase.auth().currentUser,
       text: ''
     }
   }
@@ -74,7 +74,7 @@ class SubmitImageView extends Component {
     //the JSON object sent to Firebase below contains text, geolocation, username, and a timestamp
     this.props.dbRef.push({ 
       message: this.state.text,
-      user: this.state.user.displayName,
+      user: this.user.displayName,
       latitude: this.state.lastPosition.coords.latitude,
       longitude: this.state.lastPosition.coords.longitude, 
       timestamp: Date.now(), 
