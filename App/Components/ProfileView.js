@@ -15,15 +15,24 @@ const styles = StyleSheet.create({
     flex: 1
   },
   rowContainer: {
-    paddingTop: 10,
-    marginTop: 10
+    padding: 10,
+    flexDirection: 'row'
   },
-  contentContainer: {
-    margin: 5,
+  imageContainer: {
+    margin: 3,
+    flex: 2,
     alignItems: 'stretch'
   },
+  contentContainer: {
+    margin: 3,
+    flex: 3,
+    justifyContent: 'center'
+  },
   listImage: {
-     height: 200
+    height: 75
+  },
+  listText: {
+    fontSize: 17 
   },
   headerContainer: {
     backgroundColor: '#48BBEC',
@@ -156,11 +165,13 @@ class ProfileView extends Component {
           renderRow={(rowData) => {
             return (
               <View style={styles.rowContainer}>
-                <View style={styles.contentContainer}>
+                <View style={styles.imageContainer}>
                   <Image source={{uri: rowData.imagePath}} style={styles.listImage} />
-                  <Text>{rowData.name}</Text>
-                  <Text>{rowData.text}</Text>
-                  <Text>{rowData.date}</Text>
+                </View>
+                <View style={styles.contentContainer}>
+                  <Text style={styles.listText}>{rowData.name}</Text>
+                  <Text style={styles.listText}>{rowData.text}</Text>
+                  <Text style={styles.listText}>{rowData.date}</Text>
                 </View>
               </View>
             );
