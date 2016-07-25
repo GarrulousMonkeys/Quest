@@ -26,9 +26,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     height: 100,
-    textAlign: 'center',
-    fontSize: 20,
-    padding: 10
+    textAlign: 'center'
   },
    bottomNav: { 
     flex:2,
