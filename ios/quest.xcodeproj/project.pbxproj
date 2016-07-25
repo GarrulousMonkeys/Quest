@@ -24,6 +24,7 @@
 		75EA9E6E1D4043E30056D05F /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF727D1D4042F3000C20BF /* libRCTCamera.a */; };
 		75EA9E8C1D41C2B20056D05F /* AssetLibraryToBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 75EA9E8B1D41C2B20056D05F /* AssetLibraryToBase64.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		CAE310DA1D467EEC0060E56B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAE310D91D467EEC0060E56B /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		75EA9E8B1D41C2B20056D05F /* AssetLibraryToBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetLibraryToBase64.m; path = "../node_modules/react-native-asset-library-to-base64/ios/AssetLibraryToBase64.m"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CAE310D91D467EEC0060E56B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../../../Desktop/Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CAE310D91D467EEC0060E56B /* Media.xcassets */,
 				13B07FAE1A68108700A75B9A /* quest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* questTests */,
@@ -374,6 +377,7 @@
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				CAE310D81D467ECD0060E56B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -563,6 +567,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CAE310D81D467ECD0060E56B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAE310DA1D467EEC0060E56B /* Media.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -670,6 +682,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.garrulousmonkeys.quest;
 				PRODUCT_NAME = quest;
 			};
 			name = Debug;
@@ -690,6 +703,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.garrulousmonkeys.quest;
 				PRODUCT_NAME = quest;
 			};
 			name = Release;
