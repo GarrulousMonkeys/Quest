@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
   TouchableHighlight
 } from 'react-native';
 
@@ -14,11 +13,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 60,
     flex: 1
-  },
-  loading: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8
   },
   rowContainer: {
     paddingTop: 10,
