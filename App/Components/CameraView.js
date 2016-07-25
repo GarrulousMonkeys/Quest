@@ -94,7 +94,7 @@ class CameraView extends Component {
           aspect={Camera.constants.Aspect.fill}>
             <TouchableHighlight onPress={() => this._handleNextPage('CameraRollView')}>
               <View style={styles.goToCameraRoll}>
-                <Text style={styles.cameraRollText}>CAMERAROLL</Text>
+                <Image source={require('./Assets/cameraroll.png')}/>
               </View>
             </TouchableHighlight>
           <TouchableHighlight onPress={this.takePicture.bind(this)}>
