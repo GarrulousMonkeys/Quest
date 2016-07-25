@@ -79,6 +79,7 @@ class SignInView extends Component {
       password: '',
       error: ''
     }
+    this._handleAuth();
   }
 
   _handleSignIn() {
@@ -112,9 +113,6 @@ class SignInView extends Component {
   }
 
   render() {
-
-    this._handleAuth();
-
     return (
       <Image style={ styles.bgImage } 
         source={ {uri: 'https://media.giphy.com/media/XWlS8OnV0KEBW/giphy.gif'} }>
