@@ -116,6 +116,9 @@ class ProfileView extends Component {
     });
   }
 
+  componentWillUnmount() {
+     this.props.dbRef.off();
+   }
 
   _handleLogOut() {
     firebase.auth().signOut().then(() => {
@@ -147,6 +150,8 @@ class ProfileView extends Component {
       <View style={styles.container}>
         <ListView
           dataSource={this.state.dataSource}
+          initialListSize={3}
+          scrollRenderAheadDistance={3}
           renderHeader={this.renderHeader.bind(this)}
           renderRow={(rowData) => {
             return (

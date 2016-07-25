@@ -78,6 +78,10 @@ class MainMapView extends Component {
     this.props.navigator.push({name: componentName});
   }
 
+  componentWillUnmount() {
+     this.props.dbRef.off();
+   }
+
   render() {
     return (
       <View style={styles.mapContainer}>

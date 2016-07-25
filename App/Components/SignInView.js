@@ -96,7 +96,7 @@ class SignInView extends Component {
         });    
   }
 
-  _handleAuth(){
+  _handleAuth() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this._handleToMap();

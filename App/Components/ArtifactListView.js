@@ -87,6 +87,10 @@ class ArtifactListView extends Component {
     });
   }
 
+  componentWillUnmount() {
+     this.props.dbRef.off();
+   }
+
   render() {
 
     return (
@@ -94,7 +98,7 @@ class ArtifactListView extends Component {
         <ListView ref="listView" style={styles.list} 
         dataSource={this.state.dataSource}
         initialListSize={3}
-        scrollRenderAheadDistance={10}
+        scrollRenderAheadDistance={3}
         renderRow={(rowData) => 
           <View style={styles.listItem}>
             <View><Image source={{uri: rowData.imagePath}} style={styles.listImage} /></View>
