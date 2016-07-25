@@ -92,10 +92,8 @@ const styles = StyleSheet.create({
 class quest extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      dbRef: firebaseApp.database().ref(),
-      storageRef: firebaseApp.storage().ref() 
-    }
+    this.dbRef = firebaseApp.database().ref(),
+    this.storageRef = firebaseApp.storage().ref() 
   }
 
   renderScene(route, navigator) {
@@ -107,8 +105,8 @@ class quest extends Component {
         route={route}
         path={path}
         base64={base64}
-        dbRef={this.state.dbRef}
-        storageRef={this.state.storageRef}
+        dbRef={this.dbRef}
+        storageRef={this.storageRef}
         navigator={navigator} />
     );
   }
