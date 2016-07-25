@@ -11,8 +11,7 @@ import {
   NavigatorIOS,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  MapView,
-  AsyncStorage
+  MapView
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -24,24 +23,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  buttonText: {
-    color: '#48BBEC',
-    fontSize: 18,
-    textAlign: 'center'
-  },
   map: {
     height:400,
     flex: 5
   },
   bottomNavButton: {
     flex:1,
-    backgroundColor: "#FFF",
-    justifyContent: 'center',
+    backgroundColor: "#d3d3d3",
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#48BBEC',
-    padding: 10,
-    margin: 2
+    borderWidth: 1
   }
 });
 
@@ -104,20 +94,34 @@ class MainMapView extends Component {
           <View style={styles.bottomNav}>
 
             <TouchableWithoutFeedback onPress={() => this._handleNextPage('ProfileView')}>
-              <View style={styles.bottomNavButton} underlayColor='#48BBEC'>
-                <Text style={styles.buttonText}>Profile</Text>
+              <View style={styles.bottomNavButton}>
+                <Text>Button: Go to Profile</Text>
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback onPress={() => this._handleNextPage('CameraView')}>
+            <TouchableWithoutFeedback onPress={() =>
+              AlertIOS.alert(
+                'Add an Artifact',
+                'What kind of artifact would you like to add?',
+                 [
+                   {text: 'Picture', onPress: () => this._handleNextPage('CameraView')},
+                   {text: 'Message', onPress: () => this._handleNextPage('DropView')},
+                 ],
+              )}>
               <View style={styles.bottomNavButton}>
-                <Text style={styles.buttonText}>Add Artifact</Text>
+                <Text>Button: Add Artifact</Text>
+              </View>
+            </TouchableWithoutFeedback>
+
+            <TouchableWithoutFeedback onPress={() => this._handleNextPage('CameraRollView')}>
+              <View style={styles.bottomNavButton}>
+                <Text>Button: Camera Roll</Text>
               </View>
             </TouchableWithoutFeedback>
 
             <TouchableWithoutFeedback onPress={() => this._handleNextPage('ArtifactListView')}>
               <View style={styles.bottomNavButton}>
-                <Text style={styles.buttonText}>List View</Text>
+                <Text>Button: Go to List View</Text>
               </View>
             </TouchableWithoutFeedback>
 

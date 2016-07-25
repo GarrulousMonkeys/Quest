@@ -7,7 +7,6 @@ import {
   NativeModules,
   View,
   NavigatorIOS,
-  ActivityIndicator,
   TouchableWithoutFeedback
 } from 'react-native';
 
@@ -17,18 +16,13 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'column',
     justifyContent: 'center',
-    // alignItems: 'flex-start',
+    alignItems: 'flex-start',
     backgroundColor: 'white',
     paddingTop:20
   }, 
   list: {
     flex:1
   }, 
-  loading: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8
-  },
   listViewButton: {
     flex:1,
     paddingTop:20,
@@ -55,7 +49,7 @@ class ArtifactListView extends Component {
   }
 
   componentDidMount() {
-    this.setToggle
+
     this.props.dbRef.on('value', (snapshot) => {
       let parsedItems = [];
 
