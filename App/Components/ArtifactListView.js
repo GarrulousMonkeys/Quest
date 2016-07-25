@@ -12,29 +12,28 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 44,
-    flex:1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    backgroundColor: 'white',
-    paddingTop:20
-  }, 
-  list: {
+    marginTop: 60,
     flex:1
   }, 
-  listViewButton: {
-    flex:1,
-    paddingTop:20,
-    marginTop: 20
+  rowContainer: {
+    padding: 10,
+    flexDirection: 'row'
+  },
+  imageContainer: {
+    margin: 3,
+    flex: 2,
+    alignItems: 'stretch'
+  },
+  contentContainer: {
+    margin: 3,
+    flex: 3,
+    justifyContent: 'center'
   },
   listImage: {
-    width:380,
-    height:169
-  }, 
-  listItem: {
-    borderWidth: 0.5, 
-    borderColor: '#d6d7da'
+    height: 75
+  },
+  listText: {
+    fontSize: 17 
   }
 });
 
@@ -92,26 +91,30 @@ class ArtifactListView extends Component {
    }
 
   render() {
-
     return (
       <View style={styles.container}>
         <ListView ref="listView" style={styles.list} 
-        dataSource={this.state.dataSource}
-        initialListSize={3}
-        scrollRenderAheadDistance={3}
-        renderRow={(rowData) => 
-          <View style={styles.listItem}>
-            <View><Image source={{uri: rowData.imagePath}} style={styles.listImage} /></View>
-            <Text>{rowData.text}</Text>
-            <Text>{rowData.name}</Text>
-            <Text>{rowData.date}</Text>
-          </View> 
-        } />
+          dataSource={this.state.dataSource}
+          initialListSize={3}
+          scrollRenderAheadDistance={3}
+          renderRow={(rowData) => {
+            return (
+              <View style={styles.rowContainer}>
+                <View style={styles.imageContainer}>
+                  <Image source={{uri: rowData.imagePath}} style={styles.listImage} />
+                </View>
+                <View style={styles.contentContainer}>
+                  <Text style={styles.listText}>{rowData.name}</Text>
+                  <Text style={styles.listText}>{rowData.text}</Text>
+                  <Text style={styles.listText}>{rowData.date}</Text>
+                </View>
+              </View>
+            );
+          }
+        }/>
       </View>
     );
   }
 }
 
-export {ArtifactListView}
-
-
+export { ArtifactListView };
