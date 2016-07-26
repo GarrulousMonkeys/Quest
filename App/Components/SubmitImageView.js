@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
   mainImage: {
-    height: 500,
+    height: 400,
     marginTop: 50
   },
   caption: {
-    height: 100,
-    textAlign: 'center',
     fontSize: 20,
-    padding: 10
+    padding: 10,
+    height: 50,
+    textAlign: 'left'
   },
    bottomNav: { 
     flex:2,
@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor: "#24CE84",
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: 30,
+    justifyContent: 'center',
+    paddingTop: 110,
+    paddingBottom:30
   },
   buttonText: {
     color: '#FFF',
@@ -94,13 +95,14 @@ class SubmitImageView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.mainImage} source={{uri: this.props.path}}/>
-        <TextInput multiline={true} onChangeText={(text) => this.setState({text})} value={this.state.text}style={styles.caption} placeholder='Add caption'></TextInput>
+
         <TouchableHighlight onPress={() => this.sendArtifact()}>
             <View style={styles.bottomNavButton}>
               <Text style={styles.buttonText}>SUBMIT ARTIFACT</Text>
             </View>
-          </TouchableHighlight>
+        </TouchableHighlight>
+        <TextInput multiline={true} onChangeText={(text) => this.setState({text})} value={this.state.text} style={styles.caption} placeholder='Add caption'></TextInput>
+        <Image style={styles.mainImage} source={{uri: this.props.path}}/>
       </View>
     )
   }
