@@ -41,6 +41,8 @@ class ArtifactListView extends Component {
   
   constructor(props) {
     super(props)
+    //ds and dataSource are required to instatiate a ListView component
+    //The argument to ListView.DataSource below is boiler-plate provided by React-Native documentation.
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: this.ds.cloneWithRows([{}])
@@ -49,12 +51,16 @@ class ArtifactListView extends Component {
 
   componentDidMount() {
 
+    //Register a listener to the Firebase database reference.
+    //The listener grabs all data in the db at initialization, and picks up any database updates.
+    //The event listener returns a value "snapshot" from Firebase, which is a current snapshot of the db.
     this.props.dbRef.on('value', (snapshot) => {
       let parsedItems = [];
 
       snapshot.forEach((rawArtifact) => {
         let artifact = rawArtifact.val();
 
+        //Transform data from Firebase into objects the ListView is expecting
           parsedItems.push({
             name: artifact.user,
             date: artifact.timestamp,
@@ -64,6 +70,7 @@ class ArtifactListView extends Component {
 
       });
 
+      //Sort by timestamp in descending (reverse chronological) order.
       parsedItems.sort((a, b) => {
         if(a.date > b.date) {
           return -1;
@@ -74,11 +81,13 @@ class ArtifactListView extends Component {
         return 0;  
       });
 
+      //Convert dates from UNIX timestamps to human-readable.
       parsedItems.forEach((item) => {
         let stringDate = (new Date(item.date)).toString().substring(0, 24);
         item.date = stringDate;
       });
 
+      //Update State.
       this.setState({
         dataSource: this.ds.cloneWithRows(parsedItems)
       });
@@ -87,6 +96,8 @@ class ArtifactListView extends Component {
   }
 
   componentWillUnmount() {
+    //Unregister the db reference listener when the user navigates away from this view.
+    //This is necessary because otherwise the view will attemt to call setState after the component gets unmounted, which causes a warning.
      this.props.dbRef.off();
   }
 

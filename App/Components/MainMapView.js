@@ -11,8 +11,7 @@ import {
   NavigatorIOS,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  MapView,
-  AsyncStorage
+  MapView
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -50,6 +49,8 @@ class MainMapView extends Component {
   constructor(props) {
     super(props)
 
+    //Initialize the map center point and zoom level to San Francisco.
+    //Annotations will be set to a different value in componentDidMount().
     this.state = {
       region: {
         latitude: 37.74825,
@@ -63,12 +64,16 @@ class MainMapView extends Component {
 
   componentDidMount() {
 
+    //Register a listener to the Firebase database reference.
+    //The listener grabs all data in the db at initialization, and picks up any database updates.
+    //The event listener returns a value "snapshot" from Firebase, which is a current snapshot of the db.
     this.props.dbRef.on('value', (snapshot) => {
 
       var parsedItems = [];
       snapshot.forEach((rawArtifact) => {
         var artifact = rawArtifact.val();
 
+        //Transform objects from Firebase into objects that the MapView is expecting.
         parsedItems.push({
           latitude: artifact.latitude,
           longitude: artifact.longitude,
@@ -77,6 +82,7 @@ class MainMapView extends Component {
         });
       });
 
+      //Update State.
       this.setState({
         annotations: parsedItems
       });
@@ -85,13 +91,17 @@ class MainMapView extends Component {
   }
   
   componentWillUnmount() {
+    //Unregister the db reference listener when the user navigates away from this view.
+    //This is necessary because otherwise the view will attemt to call setState after the component gets unmounted, which causes a warning.
      this.props.dbRef.off();
    }
+
 
   _handleNextPage(componentName) {
     this.props.navigator.push({name: componentName});
   }
 
+   //In the MapView component, pins are represented by elements in the annotations array.
   render() {
     return (
       <View style={styles.mapContainer}>
