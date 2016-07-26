@@ -9,6 +9,7 @@ import { DropView } from './App/Components/DropView';
 import { CameraView } from './App/Components/CameraView';
 import { CameraRollView } from './App/Components/CameraRollView';
 import { SubmitImageView } from './App/Components/SubmitImageView';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 import {
   AppRegistry,
   StyleSheet,

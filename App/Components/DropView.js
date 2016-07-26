@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: 30,
+    paddingTop:100
   },
   buttonText: {
     color: '#FFF',
@@ -86,17 +87,18 @@ class DropView extends Component {
 	
 	render() {
 		return (
-			<View style={styles.container}>
-  				<TextInput multiline={true} style={styles.textInput}
-  					onChangeText={(text) => this.setState({text})}
-  					placeholder='Type artifact text here'
-  					value={this.state.text}
-  				/>
+			<View style={styles.container} >
+
         <TouchableHighlight onPress={() => this.sendArtifact()}>
           <View style={styles.bottomNavButton}>
             <Text style={styles.buttonText}>SUBMIT ARTIFACT</Text>
           </View>
         </TouchableHighlight>
+  				<TextInput multiline={true} style={styles.textInput}
+  					onChangeText={(text) => this.setState({text})}
+  					placeholder='Type artifact text here'
+  					value={this.state.text}
+  				/>
 			</View>
 		)
 	}
