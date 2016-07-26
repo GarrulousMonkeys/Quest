@@ -15,7 +15,9 @@ Xcode is needed for running this app on iOS
 ### Starting React Native
   - Quest can be started in Xcode by pressing the play button
   - Quest can also be started through the command line by running npm start.  In a new tab run react-native run-ios to open up Simulator.
-  
+### Firebase
+  - A firebase project is needed to add credentials into an environment file
+
 ## Deployment
 Quest is deployed using Bitrise, a continuous delivery service.
 - Before setting up Bitrise, Apple certificates and UUID's must be created for each team member. 
