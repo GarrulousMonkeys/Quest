@@ -70,7 +70,7 @@ class CameraRollView extends Component {
       base64: ''
     }
   }
-
+  // Sets the state of imageSelected to the image that is checked. currentImage keeps track of each image object the user touches.
   getSelectedImage(selectedImage, currentImage) {
     console.log(this.state.selectedImage);
     let num = selectedImage.length;
@@ -84,7 +84,7 @@ class CameraRollView extends Component {
       this.setState({imageSelected: true})
     }
   }
-
+  // Reads the image data and sets state as base64 encoded string of image
   handleSubmit(name) {
     if (this.state.selected[0]) {
       ReadImageData.readImage(this.state.selected[0].uri, (image) => {
@@ -97,7 +97,7 @@ class CameraRollView extends Component {
       });
     }
   }
-
+  // If an image is selected the submit button is visible. When there is no image selected an empty View
   buttonShow() {
     return this.state.imageSelected ? <TouchableHighlight onPress={() => this.handleSubmit('SubmitImageView')}>
             <View style={styles.bottomNavButton}>
@@ -105,7 +105,7 @@ class CameraRollView extends Component {
             </View>
           </TouchableHighlight> : <View></View>
   }
-
+  // CameraRollPicker is a module thatgi adds checkmark over current selected image
   render() {
     return (
       <View style={styles.container}>
