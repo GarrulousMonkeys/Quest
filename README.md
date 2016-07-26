@@ -13,6 +13,7 @@ Quest is an app to help you discover points of interest around you.
 ### Requirements for iOS
 Xcode is needed for running this app on iOS
 ### Starting React Native
+  - Run npm install
   - Quest can be started in Xcode by pressing the play button
   - Quest can also be started through the command line by running npm start.  In a new tab run react-native run-ios to open up Simulator.
 
