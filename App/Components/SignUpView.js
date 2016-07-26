@@ -88,10 +88,12 @@ class SignUpView extends Component {
     let email = this.state.email.trim();
     let password = this.state.password.trim();
 
+    // Firebase methods that creates the user 
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
         .then(() => {
 
+          // Firebase method that saves the username
           let user = firebase.auth().currentUser;
           user.updateProfile({ displayName: name })
             .then(()=>{

@@ -86,6 +86,7 @@ class SignInView extends Component {
     let email = this.state.email.trim();
     let password = this.state.password.trim();
 
+    // Firebase method to check user signin
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
         .then(() => {
@@ -97,6 +98,7 @@ class SignInView extends Component {
   }
 
   _handleAuth() {
+    // Firebase methods to checks if user is logged in
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this._handleToMap();
@@ -105,10 +107,12 @@ class SignInView extends Component {
   }
 
   _handleToMap() {
+    // Resets the stack to MainMainView
     this.props.navigator.resetTo({name: 'MainMapView'});
   }
 
   _handleToSignUp() {
+    // Pushes a SignUp component to the navigator stack
     this.props.navigator.push({name: 'SignUpView'});
   }
 

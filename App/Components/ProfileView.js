@@ -85,6 +85,7 @@ class ProfileView extends Component {
 
   componentDidMount() {
 
+    // Firebase method for querying current user's displayName and grabbing only their posts
     this.props.dbRef.orderByChild("user")
       .equalTo(this.user.displayName)
       .on('value', (snapshot) => {
@@ -126,10 +127,12 @@ class ProfileView extends Component {
   }
 
   componentWillUnmount() {
-     this.props.dbRef.off();
+    // dbRef needs to be disconnected before going to another views
+    this.props.dbRef.off();
    }
 
   _handleLogOut() {
+    // Firebase method for user signout
     firebase.auth().signOut().then(() => {
       this.props.navigator.resetTo({name: 'SignInView'});
     },(error) => {
