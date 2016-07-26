@@ -71,7 +71,6 @@ class CameraRollView extends Component {
     }
   }
 
-
   getSelectedImage(selectedImage, currentImage) {
     console.log(this.state.selectedImage);
     let num = selectedImage.length;
@@ -98,6 +97,7 @@ class CameraRollView extends Component {
       });
     }
   }
+
   buttonShow() {
     return this.state.imageSelected ? <TouchableHighlight onPress={() => this.handleSubmit('SubmitImageView')}>
             <View style={styles.bottomNavButton}>
@@ -105,6 +105,7 @@ class CameraRollView extends Component {
             </View>
           </TouchableHighlight> : <View></View>
   }
+
   render() {
     return (
       <View style={styles.container}>

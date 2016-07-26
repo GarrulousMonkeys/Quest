@@ -22,7 +22,7 @@ import {
 import { ENV } from './environment/environment';
 const firebaseApp = firebase.initializeApp(ENV);
 
-// Initialize Routes
+// ROUTES is a reference to the component being rendered in renderScene
 const ROUTES = {
   SignInView: SignInView,
   SignUpView: SignUpView,
@@ -47,7 +47,6 @@ const TITLES = {
   SubmitImageView: 'Submit Artifact'
 };
 
-// NavBar Routes
 const NavigationBarRouteMapper = {
   Title: (route, navigator, index, navState) => {
     let title = TITLES[route.name];
@@ -89,7 +88,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// container component
 class quest extends Component {
   constructor(props) {
     super(props)

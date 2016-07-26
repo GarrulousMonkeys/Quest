@@ -88,7 +88,7 @@ class ArtifactListView extends Component {
 
   componentWillUnmount() {
      this.props.dbRef.off();
-   }
+  }
 
   render() {
     return (

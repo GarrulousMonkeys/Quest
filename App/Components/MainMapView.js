@@ -84,13 +84,13 @@ class MainMapView extends Component {
     });
   }
   
-  _handleNextPage(componentName) {
-    this.props.navigator.push({name: componentName});
-  }
-
   componentWillUnmount() {
      this.props.dbRef.off();
    }
+
+  _handleNextPage(componentName) {
+    this.props.navigator.push({name: componentName});
+  }
 
   render() {
     return (
