@@ -1,3 +1,4 @@
+// import all components into index.ios so it can be references by the Navigator
 import * as firebase from 'firebase';
 import React, { Component } from 'react';
 import { SignInView } from './App/Components/SignInView';
@@ -9,7 +10,6 @@ import { DropView } from './App/Components/DropView';
 import { CameraView } from './App/Components/CameraView';
 import { CameraRollView } from './App/Components/CameraRollView';
 import { SubmitImageView } from './App/Components/SubmitImageView';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
 import {
   AppRegistry,
   StyleSheet,
@@ -35,6 +35,7 @@ const ROUTES = {
   SubmitImageView: SubmitImageView
 };
 
+// TITLES is a reference to the NavigationBarRouterMapper
 const TITLES = {
   SignInView: 'Sign In',
   SignUpView: 'Sign Up',
@@ -47,6 +48,7 @@ const TITLES = {
   SubmitImageView: 'Submit Artifact'
 };
 
+// Renders the title of the NavBar
 const NavigationBarRouteMapper = {
   Title: (route, navigator, index, navState) => {
     let title = TITLES[route.name];
@@ -88,13 +90,14 @@ const styles = StyleSheet.create({
   }
 });
 
-class quest extends Component {
+class Quest extends Component {
   constructor(props) {
     super(props)
     this.dbRef = firebaseApp.database().ref(),
     this.storageRef = firebaseApp.storage().ref() 
   }
 
+  // Core piece of the Navigator: pass the props and renders the next component
   renderScene(route, navigator) {
     let Component = ROUTES[route.name];
     let path = route.path || null;
@@ -111,6 +114,8 @@ class quest extends Component {
   }
 
   render() {
+    // The single main navigation component that controls the routes to other views
+    // The Navigator is like a stack you can push and pop views as well as reset it completely
     return (
       <Navigator
         initialRoute={ {name: 'SignInView', index: 0} } 
@@ -126,4 +131,5 @@ class quest extends Component {
   }
 }
 
-AppRegistry.registerComponent('quest', () => quest);
+// Only needed in index.ios for app registration 
+AppRegistry.registerComponent('quest', () => Quest);
