@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Quest
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > Allow users to leave artifacts at certain places for other people to discover and navigate to those points of interest.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > An app that lets you crowdsource points of interest in the city you are currently in. Any user can drop an artifact that captures their point of interest and share it with the world. It creates a community that encourages people to get out and explore the world around them.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Sometimes it's difficult to find new points of interest or remember where you've been.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Quest is a fun way to keep track of the places you've been and discover new places to go.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "Get out and discover!"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Sign up for an account on Quest and start leaving artifacts wherever you go.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I think it's great that I can leave breadcrumbs of where I've been and see where all my friends are going!"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Download our app on Bitrise!
