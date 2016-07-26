@@ -1,6 +1,4 @@
 ### node etc ###
-*.DS-Store
-
 
 # Logs
 logs
@@ -30,3 +28,8 @@ dist/
 node_modules/
 bower_components/
 environment/
+
+*.DS-Store
+ios/.DS_Store
+ios/quest.xcodeproj/xcuserdata/
+ios/quest.xcodeproj/project.xcworkspace/xcuserdata/
