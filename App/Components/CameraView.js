@@ -17,7 +17,7 @@ import {
 import Camera from 'react-native-camera';
 import { CameraRollExample } from './CameraRollView';
 import ReadTheData from 'NativeModules';
-let ReadImageData = ReadTheData.ReadImageData;
+const ReadImageData = ReadTheData.ReadImageData;
 
 const styles = StyleSheet.create({
   container: {
