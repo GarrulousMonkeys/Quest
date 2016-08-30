@@ -1,4 +1,4 @@
-# 2016-06-greenfield
+# Quest
 
 ## What is Quest?
 Quest is an app to help you discover points of interest around you.
