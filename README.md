@@ -38,6 +38,3 @@ Authentication is hosted on firebase
 - Users can use Quest to drop artifacts wherever they go. Artifacts are images or messages that are tracked by geolocation.
 - Images can be taken within the app or chosen from the user's camera roll.
 - A user will be able to view their past artifacts in their user profile, and discover nearby artifacts using the map or list view.
-
-## Things to Note
-- Currently, images are being stored as base64 strings in a property on our Artifact objects in Firebase. An npm module called react-native-asset-library-to-base64 takes the path to our photo and encodes it before sending it to the database. This has the advantage of not needing a separate storage database for image files, but has the disadvantage of potentially encoding images as very large (10s to 100s of thousands of characters) strings, which can take a long time for the client to download. 
