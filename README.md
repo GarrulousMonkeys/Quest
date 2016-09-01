@@ -1,7 +1,9 @@
 # Quest
 
 ## What is Quest?
-Quest is an app to help you discover points of interest around you.
+ > A social platform for sharing geotagged photos and messages
+
+![Quest Demo](./App/Assets/quest-demo.gif)
 
 ## Team
 1. Chris Walker
